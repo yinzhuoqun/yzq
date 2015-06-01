@@ -5,7 +5,7 @@
 author:yinzhuoqun
 python version:3.4.2
 version:v1.0
-createtime:2015/6/1
+createtime:2015/6/1 23:45
 '''
 import os,re
 from time import sleep
