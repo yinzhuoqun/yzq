@@ -4,6 +4,8 @@
 '''
 author:yinzhuoqun
 python version:3.4.2
+version:v1.0
+woshiren
 '''
 import os,re
 from time import sleep
