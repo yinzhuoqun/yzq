@@ -54,10 +54,11 @@ if len(deviceslist)!=0:
             print('devicename:',device)
             clear='adb -s %s shell pm clear %s'%(device,packagename)
             os.system(clear)
-    #清除后打开app  
-    if packagename == 'com.l99.bed':
-        startActivityName = 'com.l99.WelcomActivity'
-        startAPP(device, packagename, startActivityName)
+    #清除后打开app
+    for device in deviceslist: #批量
+        if packagename == 'com.l99.bed':
+            startActivityName = 'com.l99.WelcomActivity'
+            startAPP(device, packagename, startActivityName)
     
     sleep(3)
 else:

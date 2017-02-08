@@ -218,6 +218,7 @@ if version == 1:
                 if len(reApkPath) != 0 and len(apkPath) == 0:
                     print('=.=你触发一个特技：即将安装上次的包=.=')
                     apkPath = reApkPath
+                    print(apkPath)
 
                 apkPath = apkPath.strip();  # print(len(apkPath))	#去掉首尾空格
                 apkCount = len(re.findall('(.apk)', apkPath))

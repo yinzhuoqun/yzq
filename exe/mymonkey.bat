@@ -1,0 +1,1 @@
+cmd /k adb shell monkey -p com.l99.bed -p com.google.android.GoogleCamera --port 59201 -v -v -v
