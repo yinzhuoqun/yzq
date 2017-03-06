@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'yinzhuoqun'
-__version__ = 'v1.1.20161018'
+__version__ = 'v1.1.20170306'
 
 from platform import python_version  # 导入当前运行的python版本号
 import re, os, time, json
+try:
+    from PIL import Image
+    pil_status = "pil_true"
+except Exception as e:
+    pil_status = "pil_false"
+    print(e)
 
 if os.name == 'nt':
     os.system('color 02')
@@ -70,6 +76,22 @@ def get_screen(deviceslist, sdcardPath):
         print(screen_command)
         os.system(screen_command)
 
+#缩略图      
+def thumbnail(img):
+    size = (480, 854) # x,y
+    img_n = os.path.splitext(img)[0]+".png"
+    try:
+        img_s = Image.open(img)
+        img_s.thumbnail(size)
+        img_s.save(img_n, "PNG")
+        
+        return img_s
+        
+    except IOError:
+        print("cannot create thumbnail for", img)
+        
+        return None
+        
 #从手机复制到电脑
 def screen_to_pc(deviceslist, pwd):
     picTimes = 1  # 初始化图片序号
@@ -86,6 +108,16 @@ def screen_to_pc(deviceslist, pwd):
     else:
         if os.path.exists(pcPath) == True:
             print(pcPath)
+            if pil_status == "pil_true":
+                thumbnail(pcPath)
+                
+            url_path = r"http://192.168.66.55/media/upload/%s"%filename
+            print(url_path)
+            desktop_path = os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
+            desktop_file = os.path.join(desktop_path,"url_path.txt")
+            with open(desktop_file,"a+") as f:
+                s_time = time.strftime("%Y-%m-%d %H:%M:%S")
+                f.write(url_path + "\n")
         picTimes += 1  # 叠加图片序号防止重名
 
 
@@ -112,7 +144,8 @@ def PicSavaPathLoad():
 
 sdcardPath = '/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
 
-PicSavaPath = 'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
+# PicSavaPath = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
+PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload'  # 设置图片在电脑中的文件夹
 if os.path.exists(PicSavaPath) == False:
     PicSavaPath=os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
 
@@ -204,7 +237,7 @@ if len(deviceslist) != 0:
 
     times1 = 1  # 重置未连接设备时的时间
 
-    time.sleep(5)
+    time.sleep(10)
 # stop_run()	#再次运行
 
 else:
