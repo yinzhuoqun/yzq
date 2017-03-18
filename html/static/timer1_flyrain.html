@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Timer from flyrain</title>
+
+	<style>
+
+	#times{
+		margin: auto;
+		width: 200px;
+		color: red;
+		font-weight: bolder;
+		font-size: 50px;
+		border: 3px solid green;
+		background: #C0C0C0;
+	}
+
+	</style>
+
+</head>
+<body>
+	
+	<!-- <h4 id="times" ></h4> -->
+
+	<div>
+		<form method="get" action="">
+
+			<button id="times" type="reset" >倒计时</button>
+
+		</form>
+	</div>
+	<script>
+	// var time = 3600
+	// for (var i = 0; i < time; i++) {
+	// 	document.write(i+"</br>");
+	// };
+	var obj = document.getElementById("times");
+	var time = 10; // 倒计时的时间，设置成手动输入最好
+	var result = "完毕"
+	setInterval(function()
+	{		
+		if(time >= 0){		
+			document.getElementById("times").innerHTML = time;
+			time--;
+		  }else{if(time < 0)
+		  	{document.getElementById("times").innerHTML = result;}
+		  }
+		
+	},1000); //1000 是毫秒ms
+
+	</script>
+
+	
+<!-- 	
+<script type="text/javascript">
+ 	Date.prototype.diff = function (date)
+    {
+        return (this.getTime () - date.getTime ()) / (24 * 60 * 60 * 1000);
+    }
+     
+    onload = function ()
+    {
+        var now = new Date ('2017/01/28 00:00:00');
+        var date = new Date ();
+        var diff = now.diff (date);
+        document.getElementById ('end2').innerHTML = Math.floor (diff);
+    }
+</script>
+
+距过年
+    <span id="end2"></span> 天
+ -->
+
+
+</body>
+</html>

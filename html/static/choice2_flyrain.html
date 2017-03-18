@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Choice 2 from flyrain</title>
+</head>
+<body>
+
+	<!-- <input type="checkbox" name="choice_a" onclick="show('choice_a')"><span >全选/全不选</span>
+	<input type="checkbox"  id="choice_none" onclick="show('adverse')"><span>反选</span> -->
+
+	<hr style="border:1 dashed #987cb9" width="40%" align="left" color='#000' size=2>
+	<!-- label for="1"绑定id -->
+	<input type="checkbox" name="category" id="1" value="1" style="border: 2px;"></input>
+	<label for="1">语文</label></p>
+	
+	<input type="checkbox" name="category" id="2" value="2"></input>
+	<label for="2">数学</label></p>
+
+	<input type="checkbox" name="category" id="3" value="3"></input>
+	<label for="3">英语</label></p>
+
+	<input type="checkbox" name="category" id="4" value="4"></input>
+	<label for="4">物理</label></p>
+
+	<input type="checkbox" name="category" id="5" value="5"></input>
+	<label for="5">化学</label></p>
+
+	<input type="checkbox" name="category" id="6" value="6"></input>
+	<label for="6">生物</label></p>
+
+	<input type="checkbox" name="category" id="7" value="7"></input>
+	<label for="7">历史</label></p>
+
+	<input type="checkbox" name="category" id="8" value="8"></input>
+	<label for="8">地理</label></p>
+
+	<input type="checkbox" name="category" id="9" value="9"></input>
+	<label for="9">政治</label></p>
+
+	<input type="checkbox" name="category" id="10" value="10"></input>
+	<label for="10">美术</label></p>
+
+	<hr style="border:1 dashed #987cb9" width="40%" align="left" color='#000' size=2>
+
+	<input type="checkbox" name="choice_a" id="choice_a" onclick="show('choice_a')">
+	<!-- <span全选/全不选</span> -->
+	<label for="choice_a">全选/全不选</label>
+	<input type="checkbox"  id="choice_none" onclick="show('adverse')">
+	<!-- <span>反选</span> -->
+	<label for="choice_none">全选/全不选</label>
+
+
+	<script type="text/javascript">
+
+	function show(statues)
+	    {
+	    
+	  
+	    var items = document.getElementsByName("category");	
+
+	    switch(statues){
+
+
+	   		
+
+   	    case "adverse":
+
+   	       		for (var i = 1; i < items.length+1; i++) 
+		   			{
+		   			var e = document.getElementById(i);
+		   				if(e.checked == true){
+		   					document.getElementById(i).checked=false;
+		   					
+		   				}else{
+		   					document.getElementById(i).checked=true;
+		   				}
+		   			
+		   		    }
+   	       		break
+
+	   
+	   	case "choice_a":
+
+   	 		al = document.getElementsByName("choice_a")
+   	 		
+   	 		// alert(al.length)
+   	 		// document.write(al.length)
+   	 		// or al[1].checked == true
+	   		// if(al[0].checked||al[1].checked == true ){
+	   		if(al[0].checked == true ){
+
+	   			for (var i = 1; i < items.length+1; i++) 
+		   			{
+		   				// var e = 
+		   			document.getElementById(i).checked=true;
+
+
+		   		    }
+
+		   	   
+	   		
+		   		 }
+
+	   		else{
+
+	   			for (var i = 1; i < items.length+1; i++) 
+		   			{
+		   			// var e = 
+		   			document.getElementById(i).checked=false;
+		   			// e.checked=true;
+		   			// items[i]
+		   		    }
+		   	    	
+		        }
+
+		        break
+		     }	//swith
+	   		
+
+	   				
+
+	   
+	   	} // 函数的
+
+
+	   	// switch(statues){
+		   // 	case true:
+		   // 		// var items = document.getElementsByName("category");
+
+		   // 		for (var i = 1; i < items.length+1; i++) 
+		   // 			{
+		   // 			var e = document.getElementById(i).checked=true;
+		   // 			// e.checked=true;
+		   // 			// items[i]
+		   // 		    }
+		   // 	    	break
+
+	   	//  	case false:
+		   		
+
+		   // 		for (var i = 1; i < items.length+1; i++) 
+		   // 			{
+		   // 			var e = document.getElementById(i).checked=false;
+		   			
+		   // 		    }
+	   	//       		break
+
+   	 //       	case "adverse":
+
+   	 //       		for (var i = 1; i < items.length+1; i++) 
+		   // 			{
+		   // 			var e = document.getElementById(i);
+		   // 				if(e.checked == true){
+		   // 					document.getElementById(i).checked=false;
+		   					
+		   // 				}else{
+		   // 					document.getElementById(i).checked=true;
+		   // 				}
+		   			
+		   // 		    }
+   	 //       		break
+
+
+   	       // }
+	   	// }
+
+
+
+    
+
+	</script>
+	
+</body>
+</html>

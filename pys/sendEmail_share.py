@@ -56,8 +56,9 @@ def message_diy():
     return message
 
 
+msg_header = ""
 
-def send_mail(to_addr,message, msg_file_url=False ):
+def send_mail(to_addr,message, msg_header,msg_file_url=False ):
     # 输入邮件地址, 口令和POP3服务器地址:
     
     

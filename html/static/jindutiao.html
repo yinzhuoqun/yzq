@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>percent from flyrain</title>
+
+	<style>	
+		#box{
+			width: 204px;
+			height: 22px;
+			border: 1px solid red;
+			/*background-color: green;*/
+			position: relative;
+		}
+		#percent{
+			position: absolute;
+			height: 20px;
+			width: 0%;
+			/*width: 0%;*/
+			color: green;
+			border: 1px solid green;
+			background-color: green;
+		}
+
+		button{
+			position: absolute;
+			margin-top: 25px;
+			width: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+
+		<div id="percent">
+
+		<button id="bt" onclick="percentf()">开始</button>
+		
+		</div>
+
+	</div>
+
+
+	<script>
+			
+			// window.onload =
+			var percent = 0;
+			function percentf()
+			
+			{
+		
+			var percent_width = document.getElementById("percent");
+			
+				if (percent <=99){
+				percent_width.style.width = String(percent)+"%";
+				percent++;
+				}		
+		}
+
+		var bt=document.getElementById("bt");
+		bt.onmousedown = function(){
+		 var timer1 = setInterval("percentf()",50)
+		}
+
+		
+
+	</script>
+</body>
+</html>

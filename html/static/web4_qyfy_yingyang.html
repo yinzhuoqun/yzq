@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>yingyang</title>
+	<style>
+		 .main{ 
+			width: 300px;
+			height: 600px;
+			border: 1px solid #000;
+			border-radius: 300px 0 0 300px;
+			background: #000;
+			float: left;
+			position: relative;
+		  }
+		   .main1{ 
+			width: 300px;
+			height: 600px;
+			border: 1px solid #000;
+			border-radius: 0 300px 300px  0;
+			background: #fff;
+			float: left;
+		  }
+		  .m1{ 
+			width: 300px;
+			height: 300px;
+			border-radius: 150px;
+			background: #fff;
+			margin-left:150px;
+		   }
+		 .m2{ 
+			width: 300px;
+			height: 300px;
+			border-radius: 150px;
+			background: #000;
+			margin-left:150px;
+		  }
+		#dd:after{ 
+			content: "1111";
+		 }
+
+		 .minC1{
+		 	width: 100px;
+		 	height: 100px;
+		 	border-radius: 50px;
+		 	background: #000;
+		 	margin-left:300px; 
+			margin-top: 100px;
+			position:absolute;
+		 	z-index:55;
+		 }
+		 .minC2{
+		 	width: 100px;
+		 	height: 100px;
+		 	border-radius: 50px;
+		 	background: #fff;
+		 	margin-left:200px; 
+			margin-top: 400px;
+			position:absolute;
+		 	z-index:55;
+
+		 }
+	</style>
+	
+</head>
+<body>
+<div>
+	
+		<!-- <div class="c1"></div> -->
+		<!-- <div class="c2"></div> -->
+	</div>
+	<div class="main">
+		<div class="m1"></div> 
+		<!-- 上半圆 -->
+		<div class="m2"></div> 
+		<!-- 下半圆 -->
+		
+	</div>
+	<div>
+		<div class="main1"></div> 
+		<!-- 大圆 -->
+		<div class="minC1"></div> 
+		<!-- 小圆 -->
+		<div class="minC2"></div> 
+		<!-- 小圆 -->
+	</div>
+
+
+	
+
+</body>
+</html>

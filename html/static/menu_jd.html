@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>menu</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			list-style: none;
+
+		}
+	
+		a:link,a:visited{
+			/*background-color: ; */
+ 			text-decoration:none;  /*超链接无下划线*/
+		}
+
+		#box{
+			width: 1190;
+			height:1000px;
+			border: 1px solid red;
+			position: relative;
+			font-family: "微软雅黑";
+
+		}
+		#menu1{
+			width: 190px;
+			height: 500px;
+			font-size: 14px;
+			background-color: #6E6568;  
+			position: absolute;
+			font-family: "微软雅黑";
+			
+		}
+		#jiayongdianqi2{
+			width: 1000px;
+			height: 500px;
+			font-size: 14px;
+			margin-left: 200px;
+			padding-left: 10px;
+			border: 1px solid red;
+			font-family: "微软雅黑";
+			position: absolute;
+			display: none;
+			/*text-align: center;*/
+		}
+		#jiayongdianqi2 li a{
+			margin-left: 10px;
+			color: 	#808080;
+			/*display: inline;*/
+		}
+		
+
+		#jiayongdianqi2 li:first-of-type a{
+			background-color: #6E6568;
+			margin-left: 10px;
+			color: #fff;
+			/*display: none;*/
+			/*display: inline;*/
+			
+			/*inline 没有换行符号，block有换行符号*/
+
+		}
+		
+		#menu1 a{
+			color: #fff;
+
+			margin-left: 6px;
+
+			/*font-weight: bolder;*/
+		}
+		
+		span{
+			color: #fff;
+			/*font-weight: bolder;*/
+		}
+		#jiayongdianqi2 span{
+			color: #808080;
+		}
+		li{
+			padding-top: 12px;
+			/*margin-top: 10px;*/
+
+		}
+		a:hover{
+			color: red;
+		}
+
+		h1{
+			margin-left: 220px;
+			margin-top: 200px;
+			position: absolute;
+		}
+	</style>
+</head>
+<body >
+<div id="box">
+	<div class="log">
+		<!-- <img src="http://misc.360buyimg.com/mtd/pc/index/home/images/logo.v2.png" alt="图片加载失败了"> -->
+		<img src="./image/jd_logo.png" alt="">
+	</div>
+
+	<div id="menu1">
+		<ul>
+			<li id="jiayongdianqi1">
+				<a href="">家用电器</a>
+			</li>
+			<li id="dianzi1">
+				<a href="">手机</a>
+				<span>/</span>
+				<a href="">运营商</a>
+				<span>/</span>
+				<a href="">数码</a>
+			</li>
+			<li id="jiaju1">
+				<a href="">家居</a>
+				<span>/</span>
+				<a href="">家具</a>
+				<span>/</span>
+				<a href="">家装</a>
+				<span>/</span>
+				<a href="">厨具</a>
+			</li>
+			
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+	<div id="jiayongdianqi2">
+		<ul>
+			<li>
+				<a href=""> &nbsp;家电城 > </a>
+				<a href=""> &nbsp;品牌日 > </a>
+				<a href=""> &nbsp;智能生活馆 > </a>
+				<a href=""> &nbsp;京东净化馆 > </a>
+				<a href=""> &nbsp;京东帮服务店 > </a>
+				<a href=""> &nbsp;玩家众筹馆 >&nbsp;</a>
+			</li>
+			<li>
+				<a href=""> &nbsp;<b>电视 > </b></a>
+				<span>|</span>
+				<a href=""> &nbsp;合资品牌 </a>
+				<span>|</span>
+				<a href=""> &nbsp;国产品牌 </a>
+				<span>|</span>
+				<a href=""> &nbsp;互联网品牌 </a>
+				
+			</li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+	<h1 style="color: red;font-weight: bolder;">声明：本文学习使用，并非原站，不采集任何信息，是静态网页</h3></div>
+</div>
+<script>
+	
+	var menu1JydqId = document.getElementById("jiayongdianqi1");
+	var menu2JydqId = document.getElementById("jiayongdianqi2");
+	var dianzi1Id = document.getElementById("dianzi1");
+	var jiaju1Id = document.getElementById("jiaju1");
+
+	menu1JydqId.onmouseover=function(event){
+		menu2JydqId.style.display="inline";
+	
+	}
+	dianzi1Id.onmouseover=function(event){
+		menu2JydqId.style.display="inline";
+
+	}
+	jiaju1Id.onmouseover=function(event){
+		menu2JydqId.style.display="inline";
+
+	}
+	menu1JydqId.onmouseout=function(event){
+		menu2JydqId.style.display="none";
+
+	}
+	dianzi1.onmouseout=function(event){
+		menu2JydqId.style.display="none";
+
+	}
+	jiaju1.onmouseout=function(event){
+		menu2JydqId.style.display="none";
+
+	}
+
+</script>
+</body>
+</html>

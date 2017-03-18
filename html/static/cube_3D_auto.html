@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D Cube</title>
+	
+	<style>
+
+		
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 400px;
+			height: 400px;
+			margin: 400px auto;
+		
+			border: 1px solid #000;
+			position: relative;
+			/*-webkit-transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			-ms-transform-style: preserve-3d;*/
+			transform-style: preserve-3d;
+			perspective: 3000px;
+			/*透视点的距离*/
+			/*transition: all 6s linear;*/
+
+
+		}
+		
+		/*haver 动画*/
+	  	/*#main:hover{*/
+	     	  /*	transform:rotateZ(360deg); 
+	     	  	transform:rotateX(360deg);*/
+	     	  	/*transform:rotateY(360deg); */
+
+	     	  	/*transform: rotate3d(1,1,1,720deg);*/
+	     	  	/*4个参数，前三个，对应x,y,z轴，是标示你是否希望沿着该轴旋转，是为1，不是为0，最后一个标示旋转的角度。*/
+
+	     /*}      */
+	
+		/*animation 动画*/
+		#main{
+			animation: rotate-frame 8s infinite linear;
+			/*animation 连续转动*/
+ 			transform-origin: 50% 50% 200px;
+ 			/*transform-origin 指定变换的起点*/
+		}
+	
+		li{
+			list-style: none;
+			width: 100%;
+			height: 100%;
+			/*background: red;*/
+			position: absolute;
+			border: 1px solid #fff;
+			opacity:0.7;
+			filter:alpha(opacity=70);
+
+		}
+		
+		#box li:nth-of-type(1){
+			background: url(http://img2.3lian.com/2014/f4/45/d/53.jpg);
+			/*四叶草背景*/
+
+
+		}
+
+		#box li:nth-of-type(2){
+			/*background: blue;*/
+		
+			background: url(http://img2.3lian.com/2014/f4/45/d/53.jpg);
+			top: 400px;
+			transform-origin: top;
+			transform: rotateX(90deg);
+			
+
+		}
+
+		#box li:nth-of-type(3){
+			/*background: green;*/
+			
+			background: url(http://img2.3lian.com/2014/f4/45/d/53.jpg);
+			left: -400px;
+			transform-origin: right;
+			transform: rotateY(90deg);
+
+			
+		}
+
+		#box li:nth-of-type(4){
+			/*background: yellow;	*/
+		
+			background: url(http://img2.3lian.com/2014/f4/45/d/53.jpg);
+			top: -400px;
+			transform-origin: bottom;
+			transform: rotateX(-90deg);
+			
+		}
+
+		#box li:nth-of-type(5){
+			/*background: #FFA500;		*/
+			/*#FFA500 橙色*/
+			background: url(http://img2.3lian.com/2014/f4/45/d/53.jpg);
+			left: 400px;
+			transform-origin: left;
+			transform: rotateY(-90deg);
+			
+		}
+
+ 		#box li:nth-of-type(6){
+			/*background: #800080;	*/
+			/*#800080 紫色*/
+			background: url(http://img2.3lian.com/2014/f4/45/d/53.jpg);
+			transform: translateZ(400px);
+			/*transform: translateZ(400px);Z轴方向移动400px*/
+		} 
+		
+		#six_text{
+		/*	width: 100px;
+			height: 20px;*/
+			border: #000;
+			left: 26%;
+			top:-10%;
+			transform: translateZ(400px);
+			z-index: 9;
+
+		}
+		
+		@keyframes rotate-frame{
+			0%{
+				transform: rotateX(0deg);
+				/*transform: rotateX(0deg) rotateY(0deg);*/
+			}
+			25%{
+				/*transform: rotateY(90deg);*/
+				transform: rotateX(90deg);
+				/*transform: rotateX(90deg) rotateY(90deg);*/
+			}
+			50%{
+				transform: rotateX(180deg) rotateY(180deg);
+				/*transform: rotateY(180deg);*/
+			}
+			75%{
+				transform: rotateX(270deg) rotateY(270deg);
+				/*transform: rotateZ(270deg);*/
+
+			}
+			100%{
+				transform: rotateX(360deg) rotateY(360deg);
+			}
+		} 
+
+
+	</style>
+</head>
+<body>
+	<h2>鼠标放在盒子上有惊喜哦~</h2>
+	<div id="main"}>
+		<ul id="box">
+			<li id="one" class="cube"></li>
+			<li id="two" class="cube"></li>
+			<li id="three" class="cube"></li>
+			<li id="four" class="cube"></li>
+			<li id="five" class="cube"></li>
+			<li id="six" class="cube">
+				<div id='six_text'>
+					<font color="red">戳我可以看其他美女哦</font>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	
+	<script type="text/javascript">
+		// var imgPath = "girl400.png";
+		var imgPathList = ["./image/girl400_1.png","./image/girl400_2.png","./image/girl400_3.png",
+						"./image/girl400_4.png","./image/girl400_5.png","./image/girl400_6.png"];
+		var idNameList = ["one","two","three","four","five","six"]
+
+		for (var i = 0; i < idNameList.length; i++) {
+			idName = idNameList[i]
+			imgPath = imgPathList[i]
+			// idName=''
+			// imgPath = ''
+			document.getElementById(idName).style.backgroundImage = "url(" + imgPath + ")";
+		}
+		
+	</script>
+
+</body>
+</html>

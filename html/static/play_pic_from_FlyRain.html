@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>play_pic_from_FlyRain</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	div{
+		margin-top:50px; 
+		text-align: center;
+	}
+	</style>
+	<script>
+		//window.onload页面加载完成后执行的函数
+
+		// window.onload=function(){
+		// 	var imgId = document.getElementById(pic);
+		// 	var imglist = []
+		// 	for(i=0;i<=5;i++){
+		// 		imglist[i] = "./image/girl400_"+(i+1)+".png"
+		// 		imgId.style.src=imglist[i]
+		// 	}
+		// 	document.write(imglist);
+		// 	return imglist
+		// }
+		var time = 0;
+		var imglist = ["./image/girl400_2.png","./image/girl400_3.png","./image/girl400_4.png","./image/girl400_5.png","./image/girl400_6.png",];
+		window.onload = setInterval(function(){
+			var imgId = document.getElementById("pic");
+			// var imglist = new Array();
+			
+
+						 
+			// for(i=0;i<=5;i++){
+				// imglist.push("./image/girl400_"+(i+1)+".png")
+
+				if(time <=4){
+					// document.write(imglist.length);
+					// document.write(imglist[time]+"</br>");
+					imgId.src=imglist[time];
+					time++;
+					if(time==5){
+			    	time = 0;
+			    			}			       			       
+			    }
+			
+		    
+		},1000);
+
+	
+	</script>
+</head>
+<body>
+	<div>		
+			<img id="pic" src="./image/girl400_1.png" alt="图片加载失败">
+				
+	</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Timer from flyrain</title>
+
+	<style>
+
+	button{
+		margin: auto;
+		width: 100px;
+		color: red;
+		font-weight: bolder;
+		font-size: 50px;
+		border: 3px solid green;
+		background: #C0C0C0;
+	}
+	.sep{
+		width: 40px;
+	}
+
+	</style>
+
+</head>
+<body>
+	
+	<!-- <h4 id="times" ></h4> -->
+
+	<div>
+		<form method="get" action="">
+
+			<button id="times_h" type="reset" >时</button>
+			<button class="sep">:</button>		
+			<button id="times_m" type="reset" >分</button>
+			<button class="sep">:</button>		
+			<button id="times_s" type="reset" >秒</button>
+
+		</form>
+	</div>
+	<script>
+	// var time = 3600
+	// for (var i = 0; i < time; i++) {
+	// 	document.write(i+"</br>");
+	// };
+	var obj = document.getElementById("times");
+	var time_d = 0;
+	var time_h = 0;
+	var time_m = 1;
+	var time_s = 50; // 倒计时的时间，设置成手动输入最好
+	var result = "完毕"
+	var time_t = time_h*3600 + time_m*60 + time_s
+	setInterval(function()
+	{	
+		time_t--;
+		// document.write(time_t)
+		
+			if(time_t >= 0){
+				time_h = parseInt(time_t/3600);
+
+				time_m = parseInt((time_t -time_h*3600)/60)
+
+				time_s = parseInt(time_t -time_h*3600 -time_m*60)
+
+				document.getElementById("times_h").innerHTML = parseInt(time_h);
+				document.getElementById("times_m").innerHTML = parseInt(time_m);
+				document.getElementById("times_s").innerHTML = parseInt(time_s);
+
+
+			}
+	
+			
+
+		// if(time >= 0){		
+		// 	document.getElementById("times").innerHTML = time;
+		// 	time--;
+		//   }else{if(time < 0)
+		//   	{document.getElementById("times").innerHTML = result;}
+		//   }
+		
+	},1000); //1000 是毫秒ms
+
+	</script>
+
+	
+<!-- 	
+<script type="text/javascript">
+ 	Date.prototype.diff = function (date)
+    {
+        return (this.getTime () - date.getTime ()) / (24 * 60 * 60 * 1000);
+    }
+     
+    onload = function ()
+    {
+        var now = new Date ('2017/01/28 00:00:00');
+        var date = new Date ();
+        var diff = now.diff (date);
+        document.getElementById ('end2').innerHTML = Math.floor (diff);
+    }
+</script>
+
+距过年
+    <span id="end2"></span> 天
+ -->
+
+
+</body>
+</html>

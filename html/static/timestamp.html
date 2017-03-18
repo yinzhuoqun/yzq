@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timestamp</title>
+</head>
+<body>
+	<input type="datetime-local" id="time_choice" value="">
+	<button id="bt" onclick="get_timestamp()">计算时间戳</button>
+	<script>
+		
+		function get_timestamp(){
+			var time_value = document.getElementById("time_choice").value;
+			// document.write(typeof(time_value)+"</br>");
+			document.write("时间："+time_value+"</br>");
+
+			if(time_value.length != 0){
+				var cd = new Date(time_value);
+				// document.write(cd+"</br>")
+				var timestamp_cd = cd.getTime();
+				document.write("时间戳是："+timestamp_cd);
+			}else{
+				document.write("数据类型不对哦");
+			}
+		}
+
+	</script>
+</body>
+</html>

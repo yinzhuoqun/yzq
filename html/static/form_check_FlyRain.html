@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证 from FlyRain</title>
+	<!-- 表单验证 from FlyRain -->
+	
+	<style>
+		input::-webkit-input-placeholder { /* WebKit browsers */ 
+			/*color: red; */font-family: "微软雅黑";
+            }			 
+		input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+            color: red; 
+            } 
+		input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+            color: red; 
+            } 
+		input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+			color: red; 
+            } 
+		
+		#form_header{
+			/*width: 300px;*/
+			margin-top: 24px;
+			height: 70px;
+			width: 100%;
+			position: relative;
+			font-family: "微软雅黑";
+			border-bottom: 6px solid #F5F5F5;
+		}			
+		
+		
+
+		#logo{
+				width: 160px;
+				height: 50px;
+				overflow: hidden;
+				/*overflow: hidden;超出隐藏*/
+				/*display: none;*/
+				/*显示*/
+				position: absolute;
+			}
+
+		#vertical{
+			width: 0px;
+			height: 34px;
+			border: 1px solid #D3D3D3;
+			margin-top: 9px;
+			margin-left: 185px;
+			position: absolute;
+		}
+
+		#welcome{
+			
+			margin-left: 210px;
+			margin-top: 15px; 
+			position: absolute;
+			font-size: 18px;
+		}
+
+		#user_info{
+			margin-top: 60px;
+			margin-left: 185px;
+			font-size: 15px;
+			color: #696969;
+			font-family: "微软雅黑";
+		}
+
+		#user,#pass,#register_bt,#pass_r{
+			
+			width: 400px;
+			height:50px;
+			border: 1px solid #D3D3D3;
+			position: absolute;
+		}
+
+		#username,#password,#password_r{
+			position: absolute;
+			margin-top: 16px;
+			margin-left: 20px;
+
+		}
+
+		#username_input,#password_input,#password_r_input{
+		position: absolute;
+		margin-left: 130px;
+		margin-top: 16px;	
+
+		}
+
+		input{
+			border-style: none; /*隐藏外边框*/
+			outline:none; /*隐藏获取焦点是的边框*/
+		}
+
+	
+		#pass{
+			margin-top: 90px;
+			position: absolute;
+		}
+		
+		#pass_r{
+			margin-top: 180px;
+		}
+
+		#register{
+			margin-top: 280px;
+			position: absolute;
+
+		}
+		#register_bt{
+			background: #EE2222;
+			color: #fff;
+			font-family: "微软雅黑";
+			font-size: 16px;
+			border: 1px solid #EE2222;
+		}
+		#user_tip,#password_tip,#pass_r_tip{
+			margin-top: 60px;
+			margin-left: 24px;
+			position: absolute;			
+			font-size: 13px;
+			color: #A9A9A9;
+
+		}
+		#password_tip_img,#pass_r_tip_img{
+			/*width: 16px;*/
+			/*height: 16px;*/
+			margin-top: 60px;
+			margin-left: 5px;
+			overflow: hidden;
+			position: absolute;
+
+		}
+		#user_tip_img{
+			margin-left: 5px;
+			margin-top: -40px;
+			/*margin-top: 0px;*/
+		}
+		#password_tip{
+			margin-top: 150px;
+			margin-left: 24px;
+		}
+		#password_tip_img{
+			margin-top: 50px;
+		}
+
+		#pass_r_tip_img{
+			margin-top: 140px;
+		}
+
+		#pass_r_tip{
+			margin-top: 240px;
+			margin-left: 24px;
+		}
+		span{
+			display: none;
+			/*background:url(./image/icon.png) no-repeat 50px 0px;*/
+
+
+			/*display: block;*/
+
+		}
+
+		#user_info img{
+			display: none;
+			position:absolute; 
+			/*display: block;*/
+			clip: rect(100px 16px 116px 0px);
+			/*clip:rect(y1 x2 y2 x1)*/
+			/*注:坐标的起点是在左上角,上右下左 */
+
+		}
+
+		h1{
+			position: absolute;
+			margin-top: 400px;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="register_from">
+	<div id="form_header">
+		<div id="logo">
+			<!-- <img id="logo" src="http://misc.360buyimg.com/user/reg/1.0.0/css/i/icon.png" > -->
+			<img  src="./image/icon.png" >
+
+		</div>
+		<div id="vertical"></div>
+		<div id="welcome">
+			欢 迎 注 册
+		</div>
+
+
+	</div >
+
+	<div id="user_info">
+	<form name="userinfo" action="http://123.206.71.232:9000/index.html" method="get" onsubmit="return doSubmint();">
+		<div id="user">
+			<div id="username">用&nbsp;&nbsp;户&nbsp;&nbsp;名</div> 
+			<div id="username_input">				
+				<input style="border-style:none" type="text" name="uname" placeholder="您的账户名和登录名" maxlength="20" onclick="doChangeTipDS('username_input','user_tip','user_tip_img')" /><br/></br/>
+			</div>
+			
+			
+		</div>
+
+		<div >
+				<img id="user_tip_img" src="./image/icon.png" >
+				<span id="user_tip">支持中文、字母、数字、&nbsp;&nbsp;"-"&nbsp;&nbsp;"_"&nbsp;&nbsp;的组合 , 4-20个字符</span>
+		</div>
+
+		<div id="pass">
+			<div id="password">设 置 密 码</div> 
+			<div id="password_input">
+				<input style="border-style:none" type="text" name="upass" placeholder="建议至少使用两种字符组合"  maxlength="20" onclick="doChangeTipDS('password_input','password_tip','password_tip_img')" /><br/></br/>
+			</div>
+			
+		</div>
+
+		<div >
+				<img id="password_tip_img" src="./image/icon.png" >
+				<span id="password_tip">建议使用字母、数字和符号两种及以上的组合，6-20个字符</span>
+		</div>
+
+		<div id="pass_r">
+			<div id="password_r">确 认 密 码</div> 
+			<div id="password_r_input">
+				<input style="border-style:none" type="text" name="upass_r" placeholder="请再次输入密码"  maxlength="20" onclick="doChangeTipDS('password_r_input','pass_r_tip','pass_r_tip_img')" /><br/></br/>
+			</div>	
+		</div>
+
+		<img id="pass_r_tip_img" src="./image/icon.png" >
+				<span id="pass_r_tip">请再次输入密码</span>
+	
+		<div id="register">
+			<button id="register_bt" type="submit" onclick="return doSubmit()" name="register_submit" value="0">立即注册</button>
+			
+		</div>	
+
+	</form>
+
+
+	</div>
+
+	</div>
+	<div id="h1">
+	<h1 style="color: red;font-weight: bolder;">声明：本文学习使用，并非原站，不采集任何信息，是静态网页</h3></div>
+	<script>
+
+	function doChangeTipDS(eid,tid,mid){
+		// ,mid
+		var deid = document.getElementById(eid);
+		var dtid = document.getElementById(tid);
+		var dmid = document.getElementById(mid);
+		deid.onmouseover=function(event){
+			
+			dtid.style.display="block";
+			dmid.style.display="block";
+		}
+		deid.onclick=function(){
+			
+			dtid.style.display="block";
+			dmid.style.display="block";
+		}
+		deid.onmouseout=function(){
+			
+			dtid.style.display="none";	
+			dmid.style.display="none";
+
+		}
+
+	}
+
+	function doSubmit(){
+		var form = document.userinfo;
+		var username = form.uname.value;
+		var password = form.upass.value;
+		var password_r = form.upass_r.value;
+		if (username.length<1){
+			alert("请输入用户名");
+			return false;
+			// false 时不能提交表单
+		}
+		if (username.match(/^[a-zA-Z0-9_]{4,20}$/)==null){
+			alert("用户名长度只能在4-20个字符之间");
+			return false;
+		}
+
+		if (password.match(/^[a-zA-Z0-9~!@#$%&*_+-]{6,20}$/)==null||password_r.match(/^[a-zA-Z0-9~!@#$%&*_+-]{6,20}$/)==null){
+			alert("密码长度只能在6-20个字符之间");
+			return false;
+		}
+		if(password!=password_r){
+			alert("两次密码输入不一致")
+			return false;
+		}
+
+
+		return true;
+	}
+	</script>
+	
+</body>
+</html>

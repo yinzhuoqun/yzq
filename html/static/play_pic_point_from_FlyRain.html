@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>play_pic_from_FlyRain</title>
+	<style>
+	*{margin: 0px;padding: 0px;}
+	body{
+		text-align: center;
+	}
+	#box{
+		width: 400px;
+		height: 400px;
+		position: relative;
+		margin:0 auto;
+		margin-top: 40px;
+	}
+
+	#point{
+		width: 350px;
+		height: 30px;
+		background-color: #C0C0C0;
+		/*border: 1px solid red;*/
+		position: absolute;
+		text-align: center;
+		float: left;
+		margin-left: 25px;
+		margin-top: -40px; 
+		border-radius: 15px;
+		opacity: 0.6;
+
+	}
+	li{	
+		float: left;
+		list-style: none;
+		width: 20px;
+		height: 20px;
+		background-color: #fff;
+		border-radius: 10px;
+		margin-top: 5px;		
+		margin-left: 32px;
+		text-align: center;
+		
+		}
+
+	</style>
+	
+	
+</head>
+<body>
+	<div class="play_auto" id="box" >	
+			<div><img id="pic" src="./image/girl400_1.png" alt="图片加载失败"></div>	
+		
+			<div class="play_auto" id="point">
+					<ul >
+						<li value="0">1</li>
+						<li value="1">2</li>
+						<li value="2">3</li>
+						<li value="3">4</li>
+						<li value="4">5</li>
+						<li value="5">6</li>
+				
+			</div>
+				
+	</div>
+
+	<script >
+		//window.onload页面加载完成后执行的函数
+
+		// window.onload=function(){
+		// 	var imgId = document.getElementById(pic);
+		// 	var imglist = []
+		// 	for(i=0;i<=5;i++){
+		// 		imglist[i] = "./image/girl400_"+(i+1)+".png"
+		// 		imgId.style.src=imglist[i]
+		// 	}
+		// 	document.write(imglist);
+		// 	return imglist
+		// }
+		var time = 0;
+		var imglist = ["./image/girl400_2.png","./image/girl400_3.png","./image/girl400_4.png","./image/girl400_5.png","./image/girl400_6.png",];
+
+		var imgId = document.getElementById("pic");
+		function paly(){
+			
+				if(time <=4){
+					
+					imgId.src=imglist[time];
+					time++;
+
+					if(time==5){
+			    	time = 0;
+			    			}			       			       
+			    }	    
+		}
+
+		var timer1 = setInterval("paly()",1000)
+		var pointList = document.getElementsByTagName("li");
+		
+		for (var i = 0; i < pointList.length; i++) {
+			pointList[i].onmouseover=function(){
+
+				this.style.backgroundColor = "red";
+				// alert(imglist[i-2])
+				 imgId.src=imglist[i-2];
+				 clearInterval(timer1);
+
+			}
+			pointList[i].onmouseout=function(){
+				this.style.backgroundColor = "#fff";
+				var timer1 = setInterval("paly()",1000)
+			}
+		
+		}
+
+
+	
+	</script>
+</body>
+</html>

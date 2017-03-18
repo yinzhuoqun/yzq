@@ -12,10 +12,6 @@ except Exception as e:
     pil_status = "pil_false"
     print(e)
 
-if os.name == 'nt':
-    os.system('color 02')
-print('Author:yinzhuoqun')
-
 
 def out_eq():
     out_eq_count = 40
@@ -111,7 +107,7 @@ def screen_to_pc(deviceslist, pwd):
             if pil_status == "pil_true":
                 thumbnail(pcPath)
                 
-            url_path = r"http://192.168.66.55/media/upload/%s"%filename
+            url_path = r"http://192.168.66.55/media/upload/%s/%s"%(app_version,filename)
             print(url_path)
             desktop_path = os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
             desktop_file = os.path.join(desktop_path,"url_path.txt")
@@ -141,13 +137,22 @@ def PicSavaPathLoad():
             # print(PicSavaPath)
             return PicSavaPath
 
-
-sdcardPath = '/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
+if os.name == 'nt':
+    os.system('color 02')
+print('Author Email: zhuoqun527@qq.com\n')
+            
+                    
+sdcardPath = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
+app_version = '5.3.1'
 
 # PicSavaPath = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
-PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload'  # 设置图片在电脑中的文件夹
+PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s'%app_version  # 设置图片在电脑中的文件夹
+
 if os.path.exists(PicSavaPath) == False:
-    PicSavaPath=os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
+    try:
+        os.mkdir(PicSavaPath)
+    except Exception as e:
+        PicSavaPath=os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
 
 '''
 if os.path.exists('PicSavaPathTemp.txt') == False:
@@ -236,8 +241,8 @@ if len(deviceslist) != 0:
             print(u'（你放弃了截图）')
 
     times1 = 1  # 重置未连接设备时的时间
-
     time.sleep(10)
+    
 # stop_run()	#再次运行
 
 else:

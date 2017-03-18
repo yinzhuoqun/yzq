@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web for Hometown</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<style>
+		#box{
+			margin: auto;
+			width: 1000px;
+			height: 100%;
+			position: relative;
+
+		}
+
+		#hp_img{
+			/*text-align: center;*/			
+			/*margin: auto;*/
+			/*width: 1000px;*/
+			height: 188px;
+			/*background: url(http://jtx.afx.gov.cn/UploadFiles/201407241436249393.jpg) no-repeat;*/
+			background: url(./image/hp_head_img.jpg) no-repeat;
+			/*position: absolute;*/
+					
+
+		}
+	ul{
+		list-style: none;
+		float: left;
+		
+
+	}
+	#hp_nav li{
+		font-weight: bold;
+		float: left;
+		margin-left: 13px; /*间距*/
+		column-rule: 1px solid white;
+		color: white;
+	}
+	
+	#hp_nav{
+		/*margin: auto;*/
+		width: 1000px;
+		height: 40px;
+		background: #C72319;
+		font-size: 14px;
+
+			
+	}
+	a:link{
+		text-decoration:none;  /*超链接无下划线*/
+	}
+	a:visited{
+		color: #fff;
+	}
+	a:hover{
+		color: yellow;
+	}
+	a{	
+		
+		color: #fff; /*白色*/
+	}
+	
+	#search_bar li{
+		list-style: none;
+		/*width: 100%;*/
+		float: left;
+		margin-top: -12px;
+		margin-left: -38px;
+		/*height: 15px;*/
+		
+
+		/*position: absolute;*/
+		
+				
+	              }
+
+ 	#search_bar li:nth-of-type(2){
+				float: right;
+				margin-right: -775px;
+                                 }	
+
+	#search_bar li:nth-of-type(3){
+				float: right;
+				margin-right: -820px;
+				background: #C72319;
+                                }					
+
+ 
+	#hp_cycle_img{
+		width: 350px;
+		height: 250px;
+		border: 1px solid red;
+		margin-top: 35px;
+		position: absolute;
+	}
+
+	#hp_cycle_img_title{
+		width: 350px;
+		height: 20px;
+		border: 1px solid red;
+		margin-top: 289px;
+		position: absolute;
+
+	}
+
+	#work_stat_box{
+		width: 380px;
+		height: 274px;
+		border: 1px solid red;
+		margin-top: 35px;
+		margin-left:355px;
+	}
+	
+	#work_stat_head{
+		width: 363px;
+		height: 28px;
+		border: 1px solid red;
+		margin-top: 5px;
+		margin-left: 6px;
+		background: #C72319;
+		font-weight: bolder;
+		color: #fff;
+	}
+
+	#work_stat_content{
+		width:362px;
+		height: 227px;
+		border: 1px solid red;
+		/*margin: 5px;*/
+		margin-top: 5px;
+		margin-left: 6px;
+		
+
+	}
+
+	#work_stat_content a{
+		color: #000;
+		float: left;
+		position: absolute;
+		padding-left: 10px;
+
+	}
+
+	</style>
+
+
+</head>
+<body>
+	<div id="box">
+		<div id="hp_img"></div>
+
+		<div id="hp_nav">
+			<ul>
+				<li><a href="https://www.baidu.com/">网站首页</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">乡镇概况</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">工作动态</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">通知公告</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">领导之窗</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">法规文件</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">发展规划</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">三农服务</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">乡村建设</a></li>
+				<li class="spe">|</li>
+				<li><a href="#">魅力金田</a></li>
+			</ul>
+		</div>
+			
+		<div id="search_bar">
+			<ul >
+				<li id="current_date">
+					<script language=JavaScript>
+						today=new Date();
+						function initArray(){
+						this.length=initArray.arguments.length
+						for(var i=0;i<this.length;i++)
+						this[i+1]=initArray.arguments[i] }
+						var d=new initArray(
+						"星期日",
+						"星期一",
+						"星期二",
+						"星期三",
+						"星期四",
+						"星期五",
+						"星期六");
+						document.write(
+						"<font color=#333 style='font-size:9pt;font-family: 宋体'> "+"今天是："+
+						today.getFullYear(),"年",
+						today.getMonth()+1,"月",
+						today.getDate(),"日"+" "+
+						d[today.getDay()+1],
+						"</font>" ); 
+		
+					</script>
+				</li>
+				<li id="search_input">
+					 <input type="text" placeholder="请输入搜索的内容" name='classname'>
+				</li>
+				<li id="search_submit">
+					<input type="submit" value="搜索" name='classname' style="color:#fff;background:#C72319;"> 
+				</li>
+			</ul>			
+		</div>
+
+
+		<div>
+			<!-- 轮播图 -->
+			<div id="hp_cycle_img">
+				
+			</div>
+
+			<div id="hp_cycle_img_title">轮播图标题</div>
+		</div>
+		
+		<div id="work_stat_box">
+			<div id="work_stat_head">
+				
+				<span><a href="#" style="color:#000;size:8;"> 更多> </a></span>
+				工作动态
+				
+			</div>
+			<div id="work_stat_content">
+				<ul><a href="#">大标题</a></ul>
+				<ul><a href="#">1</a>1</ul>
+				<ul><a href="#">2</a>3</ul>
+				<ul><a href="#">3</a>3</ul>
+				<ul><a href="#">4</a>4</ul>
+				<ul><a href="#">5</a>5</ul>
+				<ul><a href="#">6</a>6</ul>
+				<ul><a href="#">7</a>7</ul>
+				<ul><a href="3">8</a>8</ul>
+
+			</div>
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>
+

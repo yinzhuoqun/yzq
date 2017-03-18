@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calc_H5 from flyrain</title>
+	<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui">
+	<style>
+		/*放大页面*/
+		body{			
+			transform: scale(1.2);			
+		}
+	
+		#box{
+			margin: auto;
+			margin-top: 60px;
+			width: 240px;
+			height: 390px;
+			color: #fff;
+			/*background: #000;*/
+			position: relative;	
+			border-radius: 4px;
+			border: 1px solid #A3A3A3;
+
+			/*font-size: 20px;*/
+		}
+
+		ul{
+			list-style: none;
+			float: left;
+			/*margin-left: 0px;*/
+			margin-top: -10px;
+		}
+		li{
+			float: left;
+			margin-left: 5px;
+		}
+
+		button:hover{
+			background: #A9A9A9;
+			font-weight: bolder;
+
+			/*color: green;*/
+		}
+
+		#input{
+
+		}
+
+		#main button{
+			width: 50px;
+			height: 50px;
+			font-size: 20px;
+			/*font-weight: bolder;*/
+			
+		}
+
+		#main{
+			position: absolute;
+			margin-top: 110px;
+			margin-left: -32px;
+		}
+		
+		#show,#result{
+			color: #000;
+			margin-top: 10px;
+			border: 1px solid #A3A3A3;
+			position: absolute;
+			margin-left: 13px;
+			width: 213px;
+			height: 30px;
+			text-align: right;
+			border-radius: 3px;
+		}
+		#show{
+			
+		}
+		
+		#result{
+			margin-top: 50px;
+			/*color: green;*/
+			
+		}
+
+		#show_value,#result_value{
+			height: 25px;
+			text-align: right;
+			outline: none;
+			border-style: none;
+			margin-right: 3px;
+			/*position: absolute;*/
+		}
+		#result_value{
+			font-weight: bolder;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id="box">
+
+		<div id="show">
+		<input id="show_value" type="text" value="">		
+		</div>
+
+		<div id="result">
+		<input  id="result_value" type="text" value="0">
+		</div>
+
+		<div id="main">
+
+
+			<ul>
+				<li>
+					<button onclick="indata('del')" id="del">←</button>
+				</li>
+				<li>
+					<button onclick="indata('clear')" id="clear">C</button>
+				</li>
+				<li>
+					<button onclick="indata('brackets')" id="brackets">()</button>
+				</li>
+				<li>
+					<button onclick="indata('divi')" id="divi">/</button>
+				</li>
+			</ul>
+			
+
+			<ul>
+				<li>
+					<button onclick="indata('seven')" id="seven" value="7">7</button>
+				</li>
+				<li>
+					<button onclick="indata('eight')" id="eight" value="8">8</button>
+				</li>
+				<li>
+					<button onclick="indata('nine')" id="nine" value="9">9</button>
+				</li>
+				<li>
+					<button onclick="indata('mult')" id="mult" value="*">*</button>
+				</li>
+			</ul>
+			
+			<ul>
+				<li>
+					<button onclick="indata('four')" id="four" value="4" >4</button>
+				</li>
+				<li>
+					<button onclick="indata('five')" id="five" value="5">5</button>
+				</li>
+				<li>
+					<button onclick="indata('six')" id="six" value="6">6</button>
+				</li>
+				<li>
+					<button onclick="indata('subt')" id="subt" value="-">-</button>
+				</li>
+			</ul>
+			
+			<ul>
+				<li>
+					<button onclick=" indata('one')" id="one" value="1">1</button>
+				</li>
+				<li>
+					<button onclick="indata('two')" id="two" value="2">2</button>
+				</li>
+				<li>
+					<button onclick="indata('three')" id="three" value="3">3</button>
+				</li>
+				<li>
+					<button onclick="indata('addi')" id="addi" value="+">+</button>
+				</li>
+			</ul>
+
+			<ul>
+				<li>
+					<button  onclick="indata('zero')" id="zero" value="0">0</button>
+				</li>
+				<li>
+					<button id="point" onclick="indata('point')">.</button>
+				</li>
+				<li>
+					<button id="equal" style="width:105px;color:green;" onclick="equal()" >=</button>
+				</li>
+				
+			</ul>
+
+
+			</div>
+		</div>	
+
+	</div>
+
+	<script>
+		// alert(document.getElementById("show_value").value)
+
+		window.document.onkeydown = function  (ent) {
+			var event = ent || window.event;
+
+			// alert(event.keyCode)
+			switch(event.keyCode){
+
+				case 13:
+					equal();
+					// var str = document.getElementById("show_value").value
+					// var count = eval(str)
+					// document.getElementById("result_value").value = count
+					break;
+				case 8:
+					var strd1 = document.getElementById("show_value").value; 
+					
+					if(strd1.length > 1){
+						var strd2 = strd1.substring(0,strd1.length-1);
+						document.getElementById("show_value").value = strd2;
+				    }else{
+				    	document.getElementById("show_value").value = "0";
+				    }
+					break;
+
+
+			}
+			
+			
+		}
+
+		function equal(){
+			var str = document.getElementById("show_value").value
+			var count = eval(str)
+			// var strr = document.getElementById("result_value").value
+			document.getElementById("result_value").value = count;
+
+
+		}
+
+		var bracketsTimes = 2;
+		function indata(id){
+			// var bracketsTimes = 2
+			// var str1 = document.getElementById("show_value").value;
+			// 	if(str1=="0"){
+			// 		document.getElementById("show_value").value="";
+			// 	}
+			switch (id){
+				case "clear":
+					document.getElementById("show_value").value="";
+					bracketsTimes--;
+					break;
+
+				case "del":
+					var strd1 = document.getElementById("show_value").value; 
+					// alert(strd1.length)
+					if(strd1.length > 1){
+						var strd2 = strd1.substring(0,strd1.length-1);
+						document.getElementById("show_value").value = strd2;
+				    }else{
+				    	document.getElementById("show_value").value = "";
+				    }
+					break;
+				
+				case "zero":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+0;
+				break;
+
+				case "one":
+				var str1 = document.getElementById("show_value").value;
+				document.getElementById("show_value").value=str1+"1";
+				break;
+
+				case "two":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"2";
+				break;
+
+				case "three":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"3";
+				break;
+
+				case "four":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"4";
+				break;
+
+				case "five":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"5";
+				break;
+
+				case "six":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"6";
+				break;
+
+				case "seven":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"7";
+				break;
+
+				case "eight":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"8";
+				break;
+
+				case "nine":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"9";
+				break;
+
+				case "point":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+".";
+				break;
+				
+				case "addi":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"+";
+				break;
+
+				case "subt":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"-";
+				break;
+
+				case "mult":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"*";
+				break;
+
+				case "divi":
+				var str1 = document.getElementById("show_value").value;				
+				document.getElementById("show_value").value=str1+"/";
+				break;
+
+				case "brackets":
+
+				var str1 = document.getElementById("show_value").value;
+				var bracketsleft = str1.split("(")
+				// if(str1.length%2==0)
+				if(bracketsTimes%2==0||bracketsleft.length==1)
+				{
+					document.getElementById("show_value").value=str1+"(";
+					
+				}else{
+					document.getElementById("show_value").value=str1+")";
+					
+				}
+				bracketsTimes++;		
+				
+				break;
+
+	
+
+			}
+		}
+
+	</script>
+</body>
+</html>

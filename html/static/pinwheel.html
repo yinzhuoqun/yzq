@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pinwheel</title>
+	<style>
+	#box{
+		width: 600px;
+		height: 120px;
+		/*background: red;*/
+		border: 2px solid #fff;
+		position: relative; /*父元素一般用相对定位*/
+		}
+
+	#main{
+		width: 600px;
+		height: 600px;
+		/*background: red;*/
+		border: 2px solid green;
+		border: 2px solid #fff;
+
+		margin-left: 200px;
+		position: relative; /*父元素一般用相对定位*/
+		/*transform: rotate(45deg); */
+
+		transition: all 5s linear; 
+		/*animation: dfc 1s linear infinite;*/
+	    }
+
+ 	#main:hover{
+
+		transform: rotate(6400deg);
+
+       }
+
+	.leaf1,.leaf2,.leaf3,.leaf4{
+		width: 300px;
+		height: 300px;
+		border: 2px solid green;
+		border-radius: 250px 0 250px 0;
+		position: absolute;
+		background-image: linear-gradient(#008000,#90EE90);
+			/*#DA70D6*/
+
+
+	}
+	
+	.leaf1{
+		transform: rotate(90deg); 
+		background-image: linear-gradient(#FF1493,#DA70D6);
+	}
+
+	.leaf2{
+		position: absolute;
+		margin-top:300px; 
+		
+
+	}
+
+	.leaf3{
+		position: absolute;
+		margin-left:300px; 
+		transform: rorate(90deg);
+
+	}
+
+	.leaf4{
+		position: absolute;
+		margin-top:300px; 
+		margin-left: 300px;
+		transform: rotate(90deg); 
+		background-image: linear-gradient(#FF1493,#DA70D6);
+	}
+
+	.point{
+		width: 40px;
+		height: 40px;
+		position: absolute;
+		/*background: yellow;*/
+		background-image: linear-gradient(#FFA500,#00FA9A);
+		border-radius: 20px 20px 20px 20px;
+		margin-top: 280px;
+		margin-left: 280px;
+	}
+	
+	.trunk{
+		height: 500px;
+		width: 20px;
+		background-image: linear-gradient(#FFFF00,#FFA500);
+		margin-left: 492px;
+		margin-top:-286px;
+		position: absolute;
+		border-radius: 5px 5px 5px 5px;
+		z-index: 99;
+	}
+
+	/*.more{
+		height: 50px;
+		position: absolute;*/
+	}
+	</style>
+</head>
+<body>
+	<h2>鼠标放在叶子上风车转动几秒</h2>
+	<div id="box"></div>
+		<div id="main">
+		
+			<div class="leaf1"></div>
+			<div class="leaf2"></div>
+			<div class="leaf3"></div>
+			<div class="leaf4"></div>
+			<div class="point"></div>
+		
+		</div>
+	<div class="trunk"></div>
+	<!-- <div class="more"></div> -->
+</body>
+</html>
