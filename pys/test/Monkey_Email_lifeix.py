@@ -56,7 +56,7 @@ def send_mail(message,msg_file_url,package):
     # password = input('Password: ')
     
     from_addr = 'zhuoquny@l99.com'
-    password = b'eXpxMjAxNQ==' # base64加密
+    password = ''
     send_model = 'qyqq' # 发送模式 企业qq邮箱or普通qq邮箱
     # send_model = 'ptqq' # 发送模式 企业qq邮箱or普通qq邮箱  
     print('发件人：%s'%from_addr)   
@@ -65,7 +65,7 @@ def send_mail(message,msg_file_url,package):
     if package == 'com.lifeix.headline':
         to_addr =['zejiez@l99.com','wenchengx@l99.com','zhuoquny@l99.com']#体育头条
     elif package == 'com.l99.bed':
-        to_addr = ['xiaoh@l99.com','changshengh@l99.com','zhuoquny@l99.com']#床聊
+        to_addr = ['xiaoh@l99.com','changshengh@l99.com','huil@l99.com','zhuoquny@l99.com']#床聊
     elif package == 'com.l99.lotto':
         to_addr = ['jiongw@l99.com','zhuoquny@l99.com','canl@l99.com']#大赢家
     else:

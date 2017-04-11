@@ -41,7 +41,7 @@ def send_mail(message, msg_file_url):
     from_addr = 'zhuoquny@l99.com'
     print('发件人：%s'%from_addr)
     # password = input('Password: ')
-    password = 'yzq2015'
+    password = ''
 
     # 收件服务器
     # pop3_server = input('POP3 server: ')
