@@ -4,7 +4,8 @@ __author__ = 'yinzhuoqun'
 
 Write_Python_version = '3.4.3'
 from platform import python_version
-import re, os, time, subprocess
+import time, re, os, sys
+import subprocess, threading
 
 
 # 判断python版本
@@ -141,11 +142,6 @@ def existFileChinese(str):
         return False
 
 
-# adb -s device install -r path
-def adbInstall(device, apkPath):
-    os.system('adb -s %s install -r %s' % (device, apkPath))
-
-
 # 把中文文件名修改成英文
 def chineseNameToEnglishname(path):
     # 取出路径的目录名和文件名
@@ -183,15 +179,56 @@ def englishNameToChinesename(path, chinesename):
     new_path = os.path.join(tuple_path_file[0], tempname)
 
 
-# print('oldpath',new_path)
-
 # 启动APP
 def startAPP(device, packageName, startActivityName):
-    startAPP = 'adb -s %s shell am start -n %s/%s' % (device, packageName, startActivityName)
-    os.system(startAPP)
+    my_command = 'adb -s %s shell am start -n %s/%s' % (device, packageName, startActivityName)
+
+    # os.system(startAPP)    
+
+    sub_process = subprocess.Popen(my_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # print(sub_process.stdout.read().decode())
 
 
-##########################
+# adb -s device install -r path
+def adbInstall(device, apkPath, packageName="", startActivityName=""):
+    my_command = 'adb -s %s install -r %s' % (device, apkPath)
+
+    # os.system(my_command)
+
+    sub_process = subprocess.Popen(my_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # sub_process = subprocess.Popen(my_command, tdout=None, stderr=None)
+
+    # print(sub_process.stderr.read().decode())
+    # print(sub_process.stdout.read().decode())
+
+    while sub_process.poll() is None:
+        err = sub_process.stderr.read(1).decode()
+        sys.stdout.write(err)
+
+        # out = sub_process.stdout.read(1).decode()
+        # sys.stdout.write(out)
+
+        sys.stdout.flush()
+
+        # out = sub_process.stdout.read(1).decode()
+        # if out == '' and sub_process.poll() != None:
+        # break
+        # if out != '':
+        # sys.stdout.write(out)
+        # sys.stdout.flush()
+
+    install_out = sub_process.stdout.read().decode()
+    print(install_out)
+
+    if "Success" in install_out:
+        if packageName != "" and startActivityName != "":
+            startAPP(device, packageName, startActivityName)
+        return True
+    else:
+        return False
+
+        ##########################
+
 
 version = versionStatus()
 
@@ -253,9 +290,7 @@ if version == 1:
 
                     device = devicesList[0];
                     print('设备名称：%s' % device)
-                    adbInstall(device, apkPath)
-                    if len(dumpContent) > 1:
-                        startAPP(device, packageName, startActivityName)
+                    adbInstall(device, apkPath, packageName, startActivityName)
 
                 else:
                     print(u'你有设备：%s台' % len(devicesList))
@@ -275,20 +310,35 @@ if version == 1:
 
                     if len(number) == 0 or int(number) > len(db_devices):
                         print('=.=你触发一个特技：即将安装到全部设备=.=')
+
+                        # for device in devicesList:
+                        # print(u'设备名称：%s' % device)
+                        # adbInstall(device, apkPath)
+                        # print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
+                        # if len(dumpContent) > 1:
+                        # startAPP(device, packageName, startActivityName)
+
+                        install_threads = []
                         for device in devicesList:
-                            print(u'设备名称：%s' % device)
-                            adbInstall(device, apkPath)
-                            print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-                            if len(dumpContent) > 1:
-                                startAPP(device, packageName, startActivityName)
+                            apk_install = threading.Thread(target=adbInstall,
+                                                           args=(device, apkPath, packageName, startActivityName),
+                                                           name=device)
+                            install_threads.append(apk_install)
+                        for t in install_threads:
+                            # print('主线程 %s' % threading.current_thread().getName())
+                            print('设备名称：%s' % t.getName())
+                            # t.setDaemon(True)
+                            t.start()
+                            # t.join()
+
 
                     elif int(number) <= len(db_devices):
                         device = db_devices[int(number)]
                         print(u'设备名称：%s' % device)
-                        adbInstall(device, apkPath)
+                        adbInstall(device, apkPath, packageName, startActivityName)
                         print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-                        if len(dumpContent) > 1:
-                            startAPP(device, packageName, startActivityName)
+                        # if len(dumpContent) > 1:
+                        # startAPP(device, packageName, startActivityName)
 
                 # 从改变的英文路径还原回中文路径
                 if resultExistChinese == True and newPathAndOldNameList != False:

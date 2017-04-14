@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'yinzhuoqun'
-__version__ = 'v1.5.20161115'
+__email__ = "zhuoqun527@qq.com"
+__version__ = 'v1.6.0'
 
 
 # 日志级别等级 ERROR > WARNING > INFO > DEBUG 等几个级别
@@ -32,7 +33,7 @@ except Exception as e:
 ''' 
     
 
-# 获取表格 bug 信息
+# 获取表格 bug 信息，第一个 sheet 
 def get_xlsx_info(path):
     if os.path.exists(path) == True:
         try:
@@ -52,7 +53,7 @@ def get_xlsx_info(path):
             for (key,value) in title_t.items():
                 if value.find('title') > -1 or value.find('标题') > -1:
                     title_index = key
-                if value.find('content')> -1 or value.find('内容') > -1 or value.find('描述') > -1 or value.find('重现步骤') > -1::
+                if value.find('content')> -1 or value.find('内容') > -1 or value.find('描述') > -1 or value.find('重现步骤') > -1:
                     content_index = key
                 if value.find('version')> -1 or value.find('版本') > -1:
                     version_index = key
@@ -135,7 +136,12 @@ def submitBug(url,username,password,bug_list):
                 time.sleep(sleep_time)
                 driver.find_element_by_xpath('//*[@id="issue_subject"]').send_keys(bug_title) # 新建问题_标题 
                              
-                info_to = driver.find_element_by_xpath('//*[@id="issue_description"]') # 新建问题_内容               
+                info_to = driver.find_element_by_xpath('//*[@id="issue_description"]') # 新建问题_内容
+                if bug_content.startswith(("http:", "https:")) and bug_content.endswith((".png", ".jpg")):
+                    # 添加单张图片地址
+                    bug_content = "![](%s)" % bug_content
+                else:
+                    bug_content = "## %s" % bug_content
                 info_to.send_keys(bug_content) 
                 time.sleep(sleep_time)
                         
@@ -192,6 +198,13 @@ def json_load():
         user_info = input_info()
               
     else:
+        with open('submit_bug_json.txt','r') as f:
+            user_info = json.load(f)
+            print("Redmime 用户名称：%s" % user_info["username"])
+            print("Redmime 登陆密码：%s" % user_info["password"])
+            print("Redmime 模块地址：%s" % user_info["url"])
+            print("Bug 信息表的路径：%s" % user_info["path"])
+            
         re_input = input('需要重新输入信息吗(Y/N)？\n')
         if re_input == 'N' or re_input == 'n' or len(re_input) == 0:
             

@@ -56,7 +56,7 @@ def send_mail(message,msg_file_url,package):
     # password = input('Password: ')
     
     from_addr = 'zhuoquny@l99.com'
-    password = ''
+    password = b'eXpxMjAxNQ==' # base64加密
     send_model = 'qyqq' # 发送模式 企业qq邮箱or普通qq邮箱
     # send_model = 'ptqq' # 发送模式 企业qq邮箱or普通qq邮箱  
     print('发件人：%s'%from_addr)   

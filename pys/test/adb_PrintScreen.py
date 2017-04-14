@@ -5,9 +5,14 @@ __version__ = 'v1.1.20170306'
 
 from platform import python_version  # 导入当前运行的python版本号
 import re, os, time, json
+import threading
+
 try:
     from PIL import Image
+
     pil_status = "pil_true"
+
+
 except Exception as e:
     pil_status = "pil_false"
     print(e)
@@ -65,30 +70,33 @@ def find_no_int(str):
     else:
         False  # 未找到非数字字符
 
-#截图到手机
+
+# 截图到手机
 def get_screen(deviceslist, sdcardPath):
     for device in deviceslist:
-        screen_command = 'adb -s %s shell /system/bin/screencap -p %s' % (device, sdcardPath);
+        screen_command = 'adb -s %s shell /system/bin/screencap -p %s' % (device, sdcardPath)
         print(screen_command)
         os.system(screen_command)
 
-#缩略图      
+
+# 缩略图
 def thumbnail(img):
-    size = (480, 854) # x,y
-    img_n = os.path.splitext(img)[0]+".png"
+    size = (480, 854)  # x,y
+    img_n = os.path.splitext(img)[0] + ".png"
     try:
         img_s = Image.open(img)
         img_s.thumbnail(size)
         img_s.save(img_n, "PNG")
-        
+
         return img_s
-        
+
     except IOError:
         print("cannot create thumbnail for", img)
-        
+
         return None
-        
-#从手机复制到电脑
+
+
+# 从手机复制到电脑
 def screen_to_pc(deviceslist, pwd):
     picTimes = 1  # 初始化图片序号
     for device in deviceslist:
@@ -96,27 +104,27 @@ def screen_to_pc(deviceslist, pwd):
         t = time.strftime("%Y%m%d%H%M%S")
         filename = '%s_%s.png' % (t, picTimes)
         pcPath = os.path.join(pwd, filename)
+
         pull_command = 'adb -s %s pull %s %s' % (device, sdcardPath, pcPath)
-    try:
-        os.system(pull_command)
-    except Exception as e:
-        print(e)
-    else:
-        if os.path.exists(pcPath) == True:
-            print(pcPath)
-            if pil_status == "pil_true":
-                thumbnail(pcPath)
-                
-            url_path = r"http://192.168.66.55/media/upload/%s/%s"%(app_version,filename)
-            print(url_path)
-            desktop_path = os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
-            desktop_file = os.path.join(desktop_path,"url_path.txt")
-            # with open(desktop_file,"a+") as f:
-            with open(desktop_file,"w") as f:
-                f.seek(0, 0)
-                s_time = time.strftime("%Y-%m-%d %H:%M:%S")
-                f.write(url_path)
-        picTimes += 1  # 叠加图片序号防止重名
+        try:
+            os.system(pull_command)
+        except Exception as e:
+            print(e)
+        else:
+            if os.path.exists(pcPath) == True:
+                print(pcPath)
+                if pil_status == "pil_true":
+                    thumbnail(pcPath)
+                url_path = r"http://192.168.66.55/media/upload/%s/%s" % (app_version, filename)
+                print(url_path)
+                desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
+                desktop_file = os.path.join(desktop_path, "url_path.txt")
+                # with open(desktop_file,"a+") as f:
+                with open(desktop_file, "w+") as f:
+                    f.seek(0, 0)
+                    s_time = time.strftime("%Y-%m-%d %H:%M:%S")
+                    f.write(url_path)
+            picTimes += 1  # 叠加图片序号防止重名
 
 
 def PicSavaPathDump(PicSavaPath):
@@ -126,7 +134,7 @@ def PicSavaPathDump(PicSavaPath):
             dPicSavaFile = []
             dPicSavaFile.append(PicSavaPath)
             json.dump(dPicSavaFile, PicSavaPathFile)
-        # print('dump')
+            # print('dump')
 
 
 def PicSavaPathLoad():
@@ -139,22 +147,22 @@ def PicSavaPathLoad():
             # print(PicSavaPath)
             return PicSavaPath
 
+
 if os.name == 'nt':
     os.system('color 02')
 print('Author Email: zhuoqun527@qq.com\n')
-            
-                    
+
 sdcardPath = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
-app_version = '5.4'  # 目录
+app_version = '5.4.0'  # 目录
 
 # PicSavaPath = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
-PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s'%app_version  # 设置图片在电脑中的文件夹
+PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
 
 if os.path.exists(PicSavaPath) == False:
     try:
         os.mkdir(PicSavaPath)
     except Exception as e:
-        PicSavaPath=os.path.join(os.path.expanduser("~"),"Desktop")	#图片保存至电脑桌面
+        PicSavaPath = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
 
 '''
 if os.path.exists('PicSavaPathTemp.txt') == False:
@@ -180,7 +188,7 @@ if len(deviceslist) != 0:
 
     if len(deviceslist) <= 2:
 
-        # 截图
+        # 截图        
         get_screen(deviceslist, sdcardPath)
         time.sleep(0.5)
         # 导出图片到pc
@@ -244,7 +252,7 @@ if len(deviceslist) != 0:
 
     times1 = 1  # 重置未连接设备时的时间
     time.sleep(10)
-    
+
 # stop_run()	#再次运行
 
 else:
