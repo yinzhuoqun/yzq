@@ -216,16 +216,20 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
         # if out != '':
         # sys.stdout.write(out)
         # sys.stdout.flush()
+    # while sub_process.poll() is None:
+        # out = sub_process.stdout.read(1).decode()
+        # sys.stdout.write(out)
+        # sys.stdout.flush()
+    
+    # install_out = sub_process.stdout.read().decode()
+    # print(install_out)
 
-    install_out = sub_process.stdout.read().decode()
-    print(install_out)
-
-    if "Success" in install_out:
-        if packageName != "" and startActivityName != "":
-            startAPP(device, packageName, startActivityName)
-        return True
-    else:
-        return False
+    # if "Success" in install_out:
+        # if packageName != "" and startActivityName != "":
+            # startAPP(device, packageName, startActivityName)
+        # return True
+    # else:
+        # return False
 
         ##########################
 
