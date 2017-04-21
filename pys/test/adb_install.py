@@ -200,12 +200,12 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
 
     # print(sub_process.stderr.read().decode())
     # print(sub_process.stdout.read().decode())
-
+    
+    # install_out = ''
     while sub_process.poll() is None:
-        err = sub_process.stderr.read(1).decode()
+        err = sub_process.stderr.read(1).decode()      
         sys.stdout.write(err)
-
-        # out = sub_process.stdout.read(1).decode()
+         # out = sub_process.stdout.read(1).decode()
         # sys.stdout.write(out)
 
         sys.stdout.flush()
@@ -221,15 +221,15 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
         # sys.stdout.write(out)
         # sys.stdout.flush()
     
-    # install_out = sub_process.stdout.read().decode()
-    # print(install_out)
-
-    # if "Success" in install_out:
-        # if packageName != "" and startActivityName != "":
-            # startAPP(device, packageName, startActivityName)
-        # return True
-    # else:
-        # return False
+    install_out = sub_process.stdout.read().decode()
+    print(install_out)
+    print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
+    if "Success" in install_out:
+        if packageName != "" and startActivityName != "":
+            startAPP(device, packageName, startActivityName)
+        return True
+    else:
+        return False
 
         ##########################
 
@@ -340,7 +340,7 @@ if version == 1:
                         device = db_devices[int(number)]
                         print(u'设备名称：%s' % device)
                         adbInstall(device, apkPath, packageName, startActivityName)
-                        print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
+                        # print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
                         # if len(dumpContent) > 1:
                         # startAPP(device, packageName, startActivityName)
 
