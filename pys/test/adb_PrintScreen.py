@@ -7,6 +7,29 @@ from platform import python_version  # 导入当前运行的python版本号
 import re, os, time, json
 import threading
 
+import win32con
+import win32clipboard as clipboard
+
+def get_clipboard_text():
+    """
+    获取剪切板的数据
+    """
+    clipboard.OpenClipboard()
+    clipboard_text = clipboard.GetClipboardData(win32con.CF_UNICODETEXT)
+    clipboard.CloseClipboard()
+    
+    return clipboard_text
+    
+def set_clipboard_text(istr):
+    """
+    设置剪切板的数据
+    """
+    clipboard.OpenClipboard()
+    clipboard.EmptyClipboard()
+    clipboard.SetClipboardData(win32con.CF_UNICODETEXT, istr)
+    clipboard.CloseClipboard()
+
+
 try:
     from PIL import Image
 
@@ -116,11 +139,12 @@ def screen_to_pc(deviceslist, pwd):
                 if pil_status == "pil_true":
                     thumbnail(pcPath)
                 url_path = r"http://192.168.66.55/media/upload/%s/%s" % (app_version, filename)
+                set_clipboard_text(url_path)
                 print(url_path)
                 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
                 desktop_file = os.path.join(desktop_path, "url_path.txt")
                 # with open(desktop_file,"a+") as f:
-                with open(desktop_file, "w+") as f:
+                with open(desktop_file, "a") as f:
                     f.seek(0, 0)
                     s_time = time.strftime("%Y-%m-%d %H:%M:%S")
                     f.write(url_path)
