@@ -7,7 +7,7 @@ import os,re,datetime,time,subprocess
 starttime=datetime.datetime.now()
 if os.name=='nt':
 	os.system('color 02')
-print('Author:yinzhuoqun\n')
+print('Email: zhuoqun527@qq.com\n')
 
 def dump_pa1(path):
 	#python里运行cmd提取包名、activity名的txt
@@ -87,14 +87,20 @@ def dump_pa(path):
 			
 		PAVList=Plist+Alist+VClist+VNlist;#print(PaList)
 		return PAVList
-		
-apkpath=input("please input apk path and press ENTER:\n")		
-dump_pa(apkpath)
+if __name__ == "__main__":	
+    msg_en_input = "Please input apk path and press ENTER:\n"
+    msg_cn_input = "请拖入 APK 并按下 ENTER 键：\n"
+    
+    apkpath=input(msg_en_input).strip()
+    while len(apkpath) == 0 :
+        apkpath=input(msg_cn_input).strip()
+        
+    dump_pa(apkpath)
 
-nowtime=time.asctime(time.localtime(time.time()))
-print('Now time:',nowtime)
-lasttime=datetime.datetime.now()
-taketime=(lasttime-starttime).seconds
-print('Take time',taketime,'s.')
-print('Auto close the window after 30 seconds.')
-time.sleep(30)
+    nowtime=time.asctime(time.localtime(time.time()))
+    print('Now time:',nowtime)
+    lasttime=datetime.datetime.now()
+    taketime=(lasttime-starttime).seconds
+    print('Take time',taketime,'s.')
+    print('Auto close the window after 30 seconds.')
+    time.sleep(30)

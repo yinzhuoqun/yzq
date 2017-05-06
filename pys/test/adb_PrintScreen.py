@@ -144,7 +144,7 @@ def screen_to_pc(deviceslist, pwd):
                 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
                 desktop_file = os.path.join(desktop_path, "url_path.txt")
                 # with open(desktop_file,"a+") as f:
-                with open(desktop_file, "a") as f:
+                with open(desktop_file, "w") as f:
                     f.seek(0, 0)
                     s_time = time.strftime("%Y-%m-%d %H:%M:%S")
                     f.write(url_path)
@@ -177,7 +177,7 @@ if os.name == 'nt':
 print('Author Email: zhuoqun527@qq.com\n')
 
 sdcardPath = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
-app_version = '5.4.0'  # 目录
+app_version = '5.5.0'  # 图片保存目录
 
 # PicSavaPath = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
 PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹

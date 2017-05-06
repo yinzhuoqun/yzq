@@ -632,7 +632,7 @@ if version == 1:
                 deviceNumber = ''
                 deviceNumberRange = False
                 while deviceNumberRange == False or len(deviceNumber) == 0:
-                    deviceNumber = input(u'请从设备序号表中选择 MonkeyTest 设备的序号:');  # print(type(deviceNumber))
+                    deviceNumber = input(u'请从设备序号表中选择 MonkeyTest 设备的序号(1/4):');  # print(type(deviceNumber))
                     if len(deviceNumber) != 0 and find_int(deviceNumber) == False:
                         if (int(deviceNumber) in deviceNumberList):
                             # print(1)
@@ -652,7 +652,7 @@ if version == 1:
                 # packageNameORpath = input('请输入包名或者包的路径:')
 
                 #########################立方快捷设置
-                packageNameORpath = input('请输入包名或者包的路径，输入1选择 Bed，2选择头条，3选择大赢家:')
+                packageNameORpath = input('请输入包名或者包的路径，输入1选择 Bed，2选择头条，3选择大赢家(2/4):')
                 if len(packageNameORpath) == 0 or packageNameORpath == '1':
                     packageNameORpath = 'com.l99.bed'
                 elif packageNameORpath == '2':
@@ -750,14 +750,14 @@ if version == 1:
                 evnet = ''  # 初始化event
                 setEvnet = 20000  # 默认event数量
                 while len(evnet) == 0 or re.findall('[^0-9]', evnet):
-                    evnet = input("请输入 MonkeyTest 事件的次数(整数)，按 ENTER 运行 %s次:" % setEvnet)
+                    evnet = input("请输入 MonkeyTest 事件的次数(整数)，按 ENTER 运行 %s次(3/4):" % setEvnet)
                     if len(evnet) != 0:
                         pass
                     else:
                         evnet = setEvnet
                         break
                 # 日志展现形式
-                text_outputstyle = '日志保存到文件请按 ENTER，输出至当前窗口请输入任意字符:'
+                text_outputstyle = '日志保存到文件请按 ENTER，输出至当前窗口请输入任意字符(4/4):'
                 outputstyle = input(text_outputstyle)
                 if len(outputstyle) == 0:
                     NewDevicesList = dlist()
