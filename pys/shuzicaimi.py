@@ -5,9 +5,11 @@
 __author__  = 'yinzhuoqun'
 __version__ = '1.0'
 '''
-import random
+import os, random
 from time import sleep
 #import os;setpath=r'set path=%path%;c:\Python34';os.system(setpath)
+if os.name=="nt":
+    os.system("color 02")
 w=1
 while 1:
 	number=random.randint(0,9)

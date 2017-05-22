@@ -10,6 +10,7 @@ import threading
 import win32con
 import win32clipboard as clipboard
 
+
 def get_clipboard_text():
     """
     获取剪切板的数据
@@ -17,9 +18,10 @@ def get_clipboard_text():
     clipboard.OpenClipboard()
     clipboard_text = clipboard.GetClipboardData(win32con.CF_UNICODETEXT)
     clipboard.CloseClipboard()
-    
+
     return clipboard_text
-    
+
+
 def set_clipboard_text(istr):
     """
     设置剪切板的数据
@@ -61,11 +63,11 @@ def version_status():
 
 # version=version_status()
 
-def dlist():
-    DevicesInfo = os.popen('adb devices')
-    DevicesInfo = DevicesInfo.read();  # print(DevicesInfo)
-    DevicesList = re.findall(r'(.*?)\tdevice\b', DevicesInfo)
-    return DevicesList
+def adb_devices():
+    devices_info = os.popen('adb devices')
+    devices_info = devices_info.read();  # print(devices_info)
+    devices = re.findall(r'(.*?)\tdevice\b', devices_info)
+    return devices
 
 
 def find_unlock_apk(device, packagename):
@@ -95,9 +97,9 @@ def find_no_int(str):
 
 
 # 截图到手机
-def get_screen(deviceslist, sdcardPath):
+def get_screen(deviceslist, sdcard_path):
     for device in deviceslist:
-        screen_command = 'adb -s %s shell /system/bin/screencap -p %s' % (device, sdcardPath)
+        screen_command = 'adb -s %s shell /system/bin/screencap -p %s' % (device, sdcard_path)
         print(screen_command)
         os.system(screen_command)
 
@@ -126,19 +128,18 @@ def screen_to_pc(deviceslist, pwd):
         # t=time.strftime("%m-%d_%H-%M-%S")	#格式化时间
         t = time.strftime("%Y%m%d%H%M%S")
         filename = '%s_%s.png' % (t, picTimes)
-        pcPath = os.path.join(pwd, filename)
-
-        pull_command = 'adb -s %s pull %s %s' % (device, sdcardPath, pcPath)
+        pc_path = os.path.join(pwd, filename)
+        pull_command = 'adb -s %s pull %s %s' % (device, sdcard_path, pc_path)
         try:
             os.system(pull_command)
         except Exception as e:
             print(e)
         else:
-            if os.path.exists(pcPath) == True:
-                print(pcPath)
+            if os.path.exists(pc_path) == True:
+                print(pc_path)
                 if pil_status == "pil_true":
-                    thumbnail(pcPath)
-                url_path = r"http://192.168.66.55/media/upload/%s/%s" % (app_version, filename)
+                    thumbnail(pc_path)
+                url_path = r"%s/%s/%s" % (django_upload_url, app_version, filename)
                 set_clipboard_text(url_path)
                 print(url_path)
                 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
@@ -151,51 +152,51 @@ def screen_to_pc(deviceslist, pwd):
             picTimes += 1  # 叠加图片序号防止重名
 
 
-def PicSavaPathDump(PicSavaPath):
+def pic_save_path_dump(pic_save_path):
     ##序列化PicSavaPath
     if os.path.exists('PicSavaPathTemp.txt') == False:
         with open('PicSavaPathTemp.txt', 'w') as PicSavaPathFile:
             dPicSavaFile = []
-            dPicSavaFile.append(PicSavaPath)
+            dPicSavaFile.append(pic_save_path)
             json.dump(dPicSavaFile, PicSavaPathFile)
             # print('dump')
 
 
-def PicSavaPathLoad():
+def pic_save_path_load():
     ##反序列化PicSavaPath
     if os.path.exists('PicSavaPathTemp.txt') == True:
         with open('PicSavaPathTemp.txt', 'r') as rePicSavaPathFile:
             rePicSavaPathFile = open('PicSavaPathTemp.txt', 'r')
             dPicSavaPath = json.load(rePicSavaPathFile)
-            PicSavaPath = dPicSavaPath[0]
-            # print(PicSavaPath)
-            return PicSavaPath
+            pic_save_path = dPicSavaPath[0]
+            # print(pic_save_path)
+            return pic_save_path
 
 
 if os.name == 'nt':
     os.system('color 02')
 print('Author Email: zhuoqun527@qq.com\n')
 
-sdcardPath = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
-app_version = '5.5.0'  # 图片保存目录
+sdcard_path = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
+app_version = '5.6.0'  # 图片保存目录
+django_upload_url = "http://192.168.66.55/media/upload"
+# pic_save_path = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
+pic_save_path = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
 
-# PicSavaPath = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
-PicSavaPath = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
-
-if os.path.exists(PicSavaPath) == False:
+if os.path.exists(pic_save_path) == False:
     try:
-        os.mkdir(PicSavaPath)
+        os.mkdir(pic_save_path)
     except Exception as e:
-        PicSavaPath = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
+        pic_save_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
 
 '''
 if os.path.exists('PicSavaPathTemp.txt') == False:
-	PicSavaPath=input('请输入截图保存的路径:')
-	while os.path.exists(PicSavaPath)==False:
-		PicSavaPath=input('请输入截图保存的路径:')
-	PicSavaPathDump(PicSavaPath)	
+	pic_save_path=input('请输入截图保存的路径:')
+	while os.path.exists(pic_save_path)==False:
+		pic_save_path=input('请输入截图保存的路径:')
+	pic_save_path_dump(pic_save_path)	
 
-PicSavaPath=PicSavaPathLoad() #初始化图片保存的路径
+pic_save_path=pic_save_path_load() #初始化图片保存的路径
 '''
 
 unlockPackagename = 'io.appium.unlock'
@@ -205,7 +206,7 @@ times1 = 1  # 初始化未连接设备时的时间
 
 # while 1:
 
-deviceslist = dlist()
+deviceslist = adb_devices()
 if len(deviceslist) != 0:
     if os.name == 'nt':
         os.system('color 02')
@@ -213,11 +214,11 @@ if len(deviceslist) != 0:
     if len(deviceslist) <= 2:
 
         # 截图        
-        get_screen(deviceslist, sdcardPath)
+        get_screen(deviceslist, sdcard_path)
         time.sleep(0.5)
         # 导出图片到pc
         if len(deviceslist) == 1:
-            screen_to_pc(deviceslist, PicSavaPath)
+            screen_to_pc(deviceslist, pic_save_path)
 
         if len(deviceslist) == 2:
 
@@ -234,14 +235,14 @@ if len(deviceslist) != 0:
 
             if len(device_number) == 0:
                 print(u'（你选择了截图全部设备）')
-                screen_to_pc(deviceslist, PicSavaPath)
+                screen_to_pc(deviceslist, pic_save_path)
 
             # 指定设备
             elif device_number <= str(len(db_devices)):
                 # 选择设备导出图片到pc
                 device = db_devices[int(device_number)]
                 deviceslist = [device]
-                screen_to_pc(deviceslist, PicSavaPath)
+                screen_to_pc(deviceslist, pic_save_path)
             elif device_number > str(len(db_devices)):
                 print(u'（你放弃了截图）')
     if len(deviceslist) >= 3:
@@ -259,23 +260,23 @@ if len(deviceslist) != 0:
         if len(device_number) == 0:
             print(u'（你选择了截图全部设备）')
             # 截图
-            get_screen(deviceslist, sdcardPath)
+            get_screen(deviceslist, sdcard_path)
             # 导出图片到pc
-            screen_to_pc(deviceslist, PicSavaPath)
+            screen_to_pc(deviceslist, pic_save_path)
 
         elif device_number <= str(len(db_devices)):
             # 生成新的deviceslist
             device = db_devices[int(device_number)]
             deviceslist = [device]
             # 对选定的设备截图
-            get_screen(deviceslist, sdcardPath)
+            get_screen(deviceslist, sdcard_path)
             # 导出图片到pc
-            screen_to_pc(deviceslist, PicSavaPath)
+            screen_to_pc(deviceslist, pic_save_path)
         elif device_number > str(len(db_devices)):
             print(u'（你放弃了截图）')
 
     times1 = 1  # 重置未连接设备时的时间
-    time.sleep(10)
+    # time.sleep(10)
 
 # stop_run()	#再次运行
 
@@ -290,8 +291,8 @@ else:
             sys.stdout.write(u'错误：没发现设备，请连接你的设备。[%ss]\r' % times1)
             sys.stdout.flush()
         else:
-            a = int(times1 / 60);  # print('a',a)
-            b = times1 % 60;  # print('b',b)
+            a = int(times1 / 60)  # print('a',a)
+            b = times1 % 60  # print('b',b)
             sys.stdout.write(u'错误：没发现设备，请连接你的设备。[%smin%ss]\r' % (a, b))
             sys.stdout.flush()
         times1 += 1
