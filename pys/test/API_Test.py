@@ -13,10 +13,14 @@ url = 'http://192.168.199.126:8080/inner/manage/user/untie/device' # 外网
 # body = {'machine_code=9C755409-1034-4A3B-A413-A84AB95844CB'} #ip4
 # body = {'machine_code':'6C849E88-F9D4-4C52-80C9-C9C9F98C3D5D'} #ip5
 # body = {'machine_code':'42F10831-30EA-4AD7-BD39-6B5133CF0E39'} # ipod 5
-# body = {'machine_code':'6696BB09-AF05-4C28-B558-CBD6A896FD98'} # ipod 5
-# body = {'machine_code':'6696BB09-AF05-4C28-B558-CBD6A896FD98'} # ipod 4
-# body = {'machine_code':'353440060156719'} # ipod 4
-body = {'machine_code':'863121026886804'} # xiaomi 2
+# body = {'machine_code':'6696BB09-AF05-4C28-B558-CBD6A896FD98'} # ipod 5b 外网
+# 9079124F-2726-4D4E-A8CD-1B81B7685AAC
+# 731A7329-ABF8-4A80-BA25-A84F9DF7E150 ipod5
+# 863121026886804
+6696BB09-AF05-4C28-B558-CBD6A896FD98
+# body = {'machine_code':'353440060156719'} # htc
+# body = {'machine_code':'863121026886804'} # xiaomi 2
+body = {'machine_code':'867886022015683'} # 胡晓
 
 #data参数
 r = requests.post(url,body)

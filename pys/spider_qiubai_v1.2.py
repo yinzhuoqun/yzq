@@ -74,10 +74,10 @@ def get_file(url):
         print('文件夹：%s 已经存在\n路  径：%s' % (dirname, path))
     os.chdir(path)  # 切换到图片保存路径
 
-    imglist = ['http://mm.howkuai.com/wp-content/uploads/2017a/01/01/11.jpg']  # test
+    # imglist = ['http://mm.howkuai.com/wp-content/uploads/2017a/01/01/11.jpg']  # test
     
     n = 1
-    for imgurl in imglist[:3]:
+    for imgurl in imglist:
         t = time.strftime("%m-%d_%H-%M-%S")
         filename = '%s_%s.png' % (t, n)
         print("文件地址：%s\n文件名称：%s" % (imgurl, filename))
@@ -91,6 +91,7 @@ def get_file(url):
                 # time.sleep(0.001) # test
 
         n += 1
+        time.sleep(1)
         # except Exception as e:
         #     print('提示：当前文件下载失败')
 
