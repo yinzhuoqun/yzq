@@ -42,7 +42,7 @@
 	
 		/*animation 动画*/
 		#main{
-			animation: rotate-frame 8s infinite linear;
+			-webkit-animation: rotate-frame 8s infinite linear;
 			/*animation 连续转动*/
  			transform-origin: 50% 50% 200px;
  			/*transform-origin 指定变换的起点*/
@@ -128,7 +128,7 @@
 
 		}
 		
-		@keyframes rotate-frame{
+		@-webkit-keyframes rotate-frame{
 			0%{
 				transform: rotateX(0deg);
 				/*transform: rotateX(0deg) rotateY(0deg);*/

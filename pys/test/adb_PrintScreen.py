@@ -178,7 +178,7 @@ if os.name == 'nt':
 print('Author Email: zhuoqun527@qq.com\n')
 
 sdcard_path = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
-app_version = '5.8.0'  # 图片保存目录
+app_version = '5.9.0'  # 图片保存目录
 django_upload_url = "http://192.168.66.55/media/upload"
 # pic_save_path = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
 pic_save_path = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
