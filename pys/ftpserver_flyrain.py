@@ -19,8 +19,8 @@ def main(user,password,ftppath=".",port=21):
     authorizer = DummyAuthorizer()
     
     #将用户名，密码，用户访问指定目录，权限 添加到里面，当目录用"."表示.py文件当前所在的目录
-    #全部权限elradfmw
-    authorizer.add_user(user, password, ftppath, perm="elr") # elr只读,perm="elradfmw",windows 路径用 /
+    authorizer.add_user(user, password, ftppath, perm="elr") #elr只读,perm="elradfmw",windows 路径用 /
+    # authorizer.add_user(user, password, ftppath, perm="elradfmw") #全部权限elradfmw
     
     #这个是添加匿名用户,任何人都可以访问，如果去掉的话，需要输入用户名和密码，可以自己尝试
     authorizer.add_anonymous(ftppath) #windows 路径用 /
