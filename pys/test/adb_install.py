@@ -186,7 +186,7 @@ def startAPP(device, packageName, startActivityName):
     # os.system(startAPP)    
 
     sub_process = subprocess.Popen(my_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    # print(sub_process.stdout.read().decode())
+    print(sub_process.stdout.read().decode())
 
 
 # adb -s device install -r path
@@ -202,12 +202,13 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
     # print(sub_process.stdout.read().decode())
     
     # install_out = ''
+    install_err = ""
     while sub_process.poll() is None:
-        err = sub_process.stderr.read(1).decode()      
+        err = sub_process.stderr.read().decode()
+        install_err += err
         sys.stdout.write(err)
-         # out = sub_process.stdout.read(1).decode()
+        # out = sub_process.stdout.read(1).decode()
         # sys.stdout.write(out)
-
         sys.stdout.flush()
 
         # out = sub_process.stdout.read(1).decode()
@@ -222,9 +223,10 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
         # sys.stdout.flush()
     
     install_out = sub_process.stdout.read().decode()
+    # install_out = sub_process.stdout.read().decode()
     print(install_out)
     print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-    if "Success" in install_out:
+    if "Success" in install_out or install_err:
         if packageName != "" and startActivityName != "":
             startAPP(device, packageName, startActivityName)
         return True
