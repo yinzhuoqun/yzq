@@ -7,6 +7,7 @@ from platform import python_version  # 导入当前运行的python版本号
 import re, os, time, json
 import threading
 
+# pip install pypiwin32
 import win32con
 import win32clipboard as clipboard
 
@@ -33,6 +34,7 @@ def set_clipboard_text(istr):
 
 
 try:
+    # pip install Pillow
     from PIL import Image
 
     pil_status = "pil_true"
@@ -178,10 +180,10 @@ if os.name == 'nt':
 print('Author Email: zhuoqun527@qq.com\n')
 
 sdcard_path = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
-app_version = '6.1.0'  # 图片保存目录
-django_upload_url = "http://192.168.66.55/media/upload"
+app_version = '1.9.80'  # 图片保存目录
+django_upload_url = "http://192.168.31.151/media/upload"
 # pic_save_path = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
-pic_save_path = r'I:\yzq\MyPythonTest\yzqProgram\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
+pic_save_path = r'E:\yinzhuoqun\djangos\TestData\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
 
 if os.path.exists(pic_save_path) == False:
     try:

@@ -38,10 +38,10 @@ def _format_addr(s):
 def send_mail(message, msg_file_url):
     # 输入邮件地址, 口令和POP3服务器地址:
     # email = input('Email: ')
-    from_addr = 'zhuoquny@l99.com'
+    from_addr = 'yzq@python3.cc'
     print('发件人：%s'%from_addr)
     # password = input('Password: ')
-    password = ''
+    password = 'wEmmn5aHHdJv3HkX'
 
     # 收件服务器
     # pop3_server = input('POP3 server: ')
@@ -53,7 +53,7 @@ def send_mail(message, msg_file_url):
     # to_addr=['changshengh@l99.com','zejiez@l99.com','wenchengx@l99.com','zhuoquny@l99.com']#体育头条
     # to_addr = ['xiaoh@l99.com','zhuoquny@l99.com']#床聊
     # to_addr = ['jiongw@l99.com','zhuoquny@l99.com','canl@l99.com']#大赢家
-    to_addr = ['jiongw@l99.com','zhuoquny@l99.com']
+    to_addr = ['yinzhuoqun@dingtalk.com']
     for to_add in to_addr:
         print('收件人：%s'%to_add)
 

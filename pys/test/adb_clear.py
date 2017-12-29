@@ -13,7 +13,7 @@ def dlist():
 # 启动APP
 def startAPP(device, packageName, startActivityName):
     startAPP = 'adb -s %s shell am start -n %s/%s' % (device, packageName, startActivityName)
-    os.system(startAPP)    
+    os.system(startAPP)
     
 deviceslist=dlist()
 if len(deviceslist)!=0:
@@ -21,7 +21,7 @@ if len(deviceslist)!=0:
         os.system('color 02')#只在windows可用
 
     #packagename=input('please input packagename and press ENTER:\n');packagename=packagename.strip()
-    packagename='com.l99.bed'	#set packagename设置包名后可一键卸载
+    packagename='com.lexiangquan.supertao'	#set packagename设置包名后可一键卸载
     #packagename='com.lifeix.headline'	#set packagename设置包名后可一键卸载
     #packagename='com.l99.lotto'	#set packagename设置包名后可一键卸载
 
