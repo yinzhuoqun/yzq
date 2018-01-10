@@ -226,7 +226,7 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
     # install_out = sub_process.stdout.read().decode()
     print(install_out)
     print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-    if "Success" in install_out or install_err:
+    if "Success" in install_out or "Success" in install_err:
         if packageName != "" and startActivityName != "":
             startAPP(device, packageName, startActivityName)
         return True
