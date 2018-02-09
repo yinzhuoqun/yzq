@@ -4,13 +4,16 @@ __author__ = 'yinzhuoqun'
 __version__ = 'v1.1.20170306'
 
 from platform import python_version  # 导入当前运行的python版本号
+# import sys
 import re, os, time, json
 import threading
 
-# pip install pypiwin32
+# pip3 install pypiwin32
 import win32con
 import win32clipboard as clipboard
 
+# pip3 install Pillow
+from PIL import Image
 
 def get_clipboard_text():
     """
@@ -136,6 +139,7 @@ def screen_to_pc(deviceslist, pwd):
             os.system(pull_command)
         except Exception as e:
             print(e)
+            return None
         else:
             if os.path.exists(pc_path) == True:
                 print(pc_path)
@@ -151,8 +155,9 @@ def screen_to_pc(deviceslist, pwd):
                     f.seek(0, 0)
                     s_time = time.strftime("%Y-%m-%d %H:%M:%S")
                     f.write(url_path)
+                return pc_path
             picTimes += 1  # 叠加图片序号防止重名
-
+            
 
 def pic_save_path_dump(pic_save_path):
     ##序列化PicSavaPath
@@ -174,14 +179,19 @@ def pic_save_path_load():
             # print(pic_save_path)
             return pic_save_path
 
-
+def show_img(path):
+    img = Image.open(path)
+    img.show()
+    # sys.exit()  #退出脚本未生效
+    
+    
 if os.name == 'nt':
     os.system('color 02')
 print('Author Email: zhuoqun527@qq.com\n')
 
 sdcard_path = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
 app_version = '1.9.80'  # 图片保存目录
-django_upload_url = "http://192.168.31.151/media/upload"
+django_upload_url = "http://192.168.1.151/media/upload"
 # pic_save_path = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
 pic_save_path = r'E:\yinzhuoqun\djangos\TestData\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
 
@@ -220,10 +230,10 @@ if len(deviceslist) != 0:
         time.sleep(0.5)
         # 导出图片到pc
         if len(deviceslist) == 1:
-            screen_to_pc(deviceslist, pic_save_path)
-
+            screen_result = screen_to_pc(deviceslist, pic_save_path)
+            if screen_result is not None:
+                show_img(screen_result)
         if len(deviceslist) == 2:
-
             db_devices = {}
             number = 1
             for device in deviceslist:
@@ -244,7 +254,9 @@ if len(deviceslist) != 0:
                 # 选择设备导出图片到pc
                 device = db_devices[int(device_number)]
                 deviceslist = [device]
-                screen_to_pc(deviceslist, pic_save_path)
+                screen_result = screen_to_pc(deviceslist, pic_save_path)
+                if screen_result is not None:
+                    show_img(screen_result)
             elif device_number > str(len(db_devices)):
                 print(u'（你放弃了截图）')
     if len(deviceslist) >= 3:
@@ -273,7 +285,9 @@ if len(deviceslist) != 0:
             # 对选定的设备截图
             get_screen(deviceslist, sdcard_path)
             # 导出图片到pc
-            screen_to_pc(deviceslist, pic_save_path)
+            screen_result = screen_to_pc(deviceslist, pic_save_path)
+            if screen_result is not None:
+                show_img(screen_result)
         elif device_number > str(len(db_devices)):
             print(u'（你放弃了截图）')
 
