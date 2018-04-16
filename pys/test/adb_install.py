@@ -2,14 +2,18 @@
 # -*- coding: utf-8 -*-
 __author__ = 'yinzhuoqun'
 
-Write_Python_version = '3.4.3'
-from platform import python_version
-import time, re, os, sys
-import subprocess, threading
+import time
+import re
+import os
+import sys
+import subprocess
+import threading
 
 
 # 判断python版本
 def versionStatus():
+    Write_Python_version = '3.4.3'
+    from platform import python_version
     writelist = re.split('\D', Write_Python_version)  # print(writelist)
     Write_version = writelist[0]  # print(Write_version)
     Currentlist = re.split('\D', python_version())  # print(Currentlist)
@@ -192,53 +196,60 @@ def startAPP(device, packageName, startActivityName):
 # adb -s device install -r path
 def adbInstall(device, apkPath, packageName="", startActivityName=""):
     my_command = 'adb -s %s install -r %s' % (device, apkPath)
+    device_android_api_version = subprocess.check_output(
+        'adb -s %s shell getprop ro.build.version.sdk' % device).decode().strip()
+    # print(type(device_android_api_version),device_android_api_version)
 
-    # os.system(my_command)
-
-    sub_process = subprocess.Popen(my_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    # sub_process = subprocess.Popen(my_command, tdout=None, stderr=None)
-
-    # print(sub_process.stderr.read().decode())
-    # print(sub_process.stdout.read().decode())
-    
-    # install_out = ''
-    install_err = ""
-    while sub_process.poll() is None:
-        err = sub_process.stderr.read().decode()
-        install_err += err
-        sys.stdout.write(err)
-        # out = sub_process.stdout.read(1).decode()
-        # sys.stdout.write(out)
-        sys.stdout.flush()
-
-        # out = sub_process.stdout.read(1).decode()
-        # if out == '' and sub_process.poll() != None:
-        # break
-        # if out != '':
-        # sys.stdout.write(out)
-        # sys.stdout.flush()
-    # while sub_process.poll() is None:
-        # out = sub_process.stdout.read(1).decode()
-        # sys.stdout.write(out)
-        # sys.stdout.flush()
-    
-    install_out = sub_process.stdout.read().decode()
-    # install_out = sub_process.stdout.read().decode()
-    print(install_out)
-    print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-    if "Success" in install_out or "Success" in install_err:
-        if packageName != "" and startActivityName != "":
-            startAPP(device, packageName, startActivityName)
-        return True
+    if int(device_android_api_version) < 24:
+        os.system(my_command)
+        print("提示：强制打开安装的 APP")
+        startAPP(device, packageName, startActivityName)
     else:
-        return False
+        sub_process = subprocess.Popen(my_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                       stderr=subprocess.PIPE)
+        # sub_process = subprocess.Popen(my_command, tdout=None, stderr=None)
 
-        ##########################
+        print(sub_process.stderr.read().decode())
+        print(sub_process.stdout.read().decode())
+
+        # install_out = ''
+        install_err = ""
+        while sub_process.poll() is None:
+            err = sub_process.stderr.read().decode()
+            install_err += err
+            sys.stdout.write(err)
+            # out = sub_process.stdout.read(1).decode()
+            # sys.stdout.write(out)
+            sys.stdout.flush()
+
+            # out = sub_process.stdout.read(1).decode()
+            # if out == '' and sub_process.poll() != None:
+            # break
+            # if out != '':
+            # sys.stdout.write(out)
+            # sys.stdout.flush()
+            # while sub_process.poll() is None:
+            # out = sub_process.stdout.read(1).decode()
+            # sys.stdout.write(out)
+            # sys.stdout.flush()
+
+        install_out = sub_process.stdout.read().decode()
+        # install_out = sub_process.stdout.read().decode()
+        print(install_out)
+        print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
+        if "Success" in install_out or "Success" in install_err:
+            if packageName != "" and startActivityName != "":
+                startAPP(device, packageName, startActivityName)
+            return True
+        else:
+            return False
+
+            ##########################
 
 
-version = versionStatus()
+# version = versionStatus()
 
-if version == 1:
+if sys.version_info.major >= 3:
 
     # print('author:yinzhuoqun')
     print('《adb install》\n Author Email : zhuoqun527@qq.com')
@@ -367,3 +378,5 @@ if version == 1:
                     sys.stdout.flush()
 
                 disconnectTime += 1
+else:
+    print("Python 版本不对应")

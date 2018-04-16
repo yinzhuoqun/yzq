@@ -60,13 +60,14 @@ def dump_version(device, name):
         version_info = os.popen("adb -s %s shell dumpsys package %s | grep version" % (device, name)).read()
 
     version_names = re.findall("versionName=(.*?)\n", version_info)
-    version_codes = re.findall("versionCode=(.*?)minSdk", version_info)
+    version_codes = re.findall("versionCode=(.*?)[minSdk|targetSdk]", version_info)
 
-    version_name = version_names[0].strip() if version_names is not None else None
-    version_code = version_codes[0].strip() if version_codes is not None else None
-    # print(version_name, version_code)
+    version_name = version_names[0].strip()+"_" if version_names else ""
+    version_code = version_codes[0].strip()+"_" if version_codes else ""
+    get_version_info = {"version_name": version_name, "version_code": version_code}
+    print(get_version_info)
 
-    return {"version_name": version_name, "version_code": version_code}
+    return get_version_info
 
 
 if os.name == 'nt':
@@ -75,11 +76,12 @@ if os.name == 'nt':
 run = version_status()
 if run == 1:
     packageName = ''  # 设置后不会弹出输入包名输入框
-    packageNameTemp = 'com.lexiangquan.supertao'  # 设置一个默认的包名
+    # packageNameTemp = 'com.lexiangquan.supertao'  # 设置一个默认的包名
     # packageNameTemp = 'com.qihoo.appstore'  # 设置一个默认的包名
     # packageNameTemp='com.chaojitao.star' #设置一个默认的包名
     # packageNameTemp='com.tencent.mm' #设置一个默认的包名
     # packageNameTemp='com.yzq.meid' #设置一个默认的包名
+    packageNameTemp='com.qmsh.hbq' #设置一个默认的包名
 
     deviceslist = dlist()
 
@@ -96,6 +98,7 @@ if run == 1:
         apkPath = os.popen(pm_path_command).read();  # print(apkPath,type(apkPath))
         apkPathlist = re.findall(r'package:(.+?.apk)', apkPath);  # print(apkPathlist)
         if len(apkPathlist) != 0:
+            version_info = dump_version(device=deviceslist[0], name=packageName)
             # 文件手机存的路径
             apkPathValue = apkPathlist[0];  # print(apkPathValue)
             deskTopPath = os.path.join(os.path.expanduser("~"), "Desktop")  # 保存至桌面
@@ -106,9 +109,9 @@ if run == 1:
             apk_path = os.path.join(deskTopPath, apk_name)
             # t = time.strftime("%Y%m%d_%H%M%S")
             t = time.strftime("%Y%m%d")
-            version_info = dump_version(device=deviceslist[0], name=packageName)
-            apkNewName = packageName + "_V" + version_info["version_name"] + "_" + version_info[
-                "version_code"] + "_" + t + '.apk'
+            
+            apkNewName = packageName + "_V" + version_info["version_name"] + version_info[
+                "version_code"] + t + '.apk'
             englishname_to_chinesename(apk_path, apkNewName)
             apk_pc_path = os.path.join(deskTopPath, apkNewName)
             if os.path.exists(apk_pc_path) == True:

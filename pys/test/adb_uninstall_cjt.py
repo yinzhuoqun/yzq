@@ -40,7 +40,10 @@ if len(deviceslist) != 0:
     # packagename='com.qzone'	#qq空间
 
     packagename = packagename.strip()
+    if len(packagename) == 0:  # 设置默认包名
+        packagename = "com.qmsh.hbq"
     print('uninstall packagename: %s' % packagename)
+
     if len(deviceslist) == 1:
         # print('uninstalling packagename: %s'%packagename)
         device = deviceslist[0]
