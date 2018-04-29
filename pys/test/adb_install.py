@@ -54,10 +54,13 @@ def dumpPA(path):
 
         if len(adb_env_list) == 0:
             print('错误：请添加 adb.exe 的环境变量')
+            time.sleep(3)
         if len(aapt_env_list) == 0:
             print('错误：请添加 aapt.exe 的环境变量')
+            time.sleep(3)
         else:
             print('错误：无效的apk文件')
+            time.sleep(3)
 
         aapt = 0
         return 0
@@ -200,51 +203,36 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
         'adb -s %s shell getprop ro.build.version.sdk' % device).decode().strip()
     # print(type(device_android_api_version),device_android_api_version)
 
-    if int(device_android_api_version) < 24:
-        os.system(my_command)
-        print("提示：强制打开安装的 APP")
-        startAPP(device, packageName, startActivityName)
+    if int(device_android_api_version) < 24:  # 24 Android 7.0
+        install_info = os.system(my_command)
+        if packageName != "" and startActivityName != "" and install_info == 0:
+            print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
+            print("提示：强制打开安装的 APP")
+            startAPP(device, packageName, startActivityName)
     else:
-        sub_process = subprocess.Popen(my_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        # , stdin = subprocess.PIPE
+        sub_process = subprocess.Popen(my_command, shell=True, stdout=subprocess.PIPE,
                                        stderr=subprocess.PIPE)
         # sub_process = subprocess.Popen(my_command, tdout=None, stderr=None)
-
-        print(sub_process.stderr.read().decode())
-        print(sub_process.stdout.read().decode())
-
-        # install_out = ''
+        # print(dir(sub_process))
+        # print(sub_process.stderr.read().decode())
+        # print(sub_process.stdout.read().decode())
         install_err = ""
         while sub_process.poll() is None:
             err = sub_process.stderr.read().decode()
             install_err += err
             sys.stdout.write(err)
-            # out = sub_process.stdout.read(1).decode()
+            # out = sub_process.stdout.read().decode()
             # sys.stdout.write(out)
             sys.stdout.flush()
 
-            # out = sub_process.stdout.read(1).decode()
-            # if out == '' and sub_process.poll() != None:
-            # break
-            # if out != '':
-            # sys.stdout.write(out)
-            # sys.stdout.flush()
-            # while sub_process.poll() is None:
-            # out = sub_process.stdout.read(1).decode()
-            # sys.stdout.write(out)
-            # sys.stdout.flush()
-
-        install_out = sub_process.stdout.read().decode()
-        # install_out = sub_process.stdout.read().decode()
-        print(install_out)
         print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-        if "Success" in install_out or "Success" in install_err:
+        if "Success" in install_err:
             if packageName != "" and startActivityName != "":
                 startAPP(device, packageName, startActivityName)
             return True
         else:
             return False
-
-            ##########################
 
 
 # version = versionStatus()

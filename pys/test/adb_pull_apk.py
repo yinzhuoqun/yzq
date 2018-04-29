@@ -49,8 +49,17 @@ def englishname_to_chinesename(path, chinesename):
     # 连接目录与旧文件名
     tempname = chinesename
     os.chdir(tuple_path_file[0])
-    os.rename(tuple_path_file[1], tempname)
     new_path = os.path.join(tuple_path_file[0], tempname)
+    try:
+        if os.path.exists(new_path):
+            os.remove(new_path)
+        os.rename(tuple_path_file[1], tempname)
+        print('文件保存的路径是：%s\n' % new_path)
+        return new_path
+    except Exception as e:
+        print(e)
+        return None
+    
 
 
 def dump_version(device, name):
@@ -64,8 +73,10 @@ def dump_version(device, name):
 
     version_name = version_names[0].strip()+"_" if version_names else ""
     version_code = version_codes[0].strip()+"_" if version_codes else ""
+    version_info_out = "VersionName:%s, VersionCode:%s" % (version_name, version_code)
+    print(version_info_out.replace("_", ""))
     get_version_info = {"version_name": version_name, "version_code": version_code}
-    print(get_version_info)
+
 
     return get_version_info
 
@@ -114,8 +125,7 @@ if run == 1:
                 "version_code"] + t + '.apk'
             englishname_to_chinesename(apk_path, apkNewName)
             apk_pc_path = os.path.join(deskTopPath, apkNewName)
-            if os.path.exists(apk_pc_path) == True:
-                print('文件保存的路径是：%s\n' % apk_pc_path)
+
         else:
             print('警告：未发现此包名的apk')
     elif len(deviceslist) > 1:
@@ -158,8 +168,7 @@ if run == 1:
                 "version_code"] + "_" + t + '.apk'
             englishname_to_chinesename(apk_path, apkNewName)
             apk_pc_path = os.path.join(deskTopPath, apkNewName)
-            if os.path.exists(apk_pc_path) == True:
-                print('文件保存的路径是：%s\n' % apk_pc_path)
+
         else:
             print('警告：未发现此包名的apk')
 
