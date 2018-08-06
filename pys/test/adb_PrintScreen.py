@@ -9,11 +9,13 @@ import re, os, time, json
 import threading
 
 # pip3 install pypiwin32
+# pip3 install Pillow
 import win32con
 import win32clipboard as clipboard
-
-# pip3 install Pillow
+from io import BytesIO
 from PIL import Image
+
+
 
 def get_clipboard_text():
     """
@@ -35,7 +37,16 @@ def set_clipboard_text(istr):
     clipboard.SetClipboardData(win32con.CF_UNICODETEXT, istr)
     clipboard.CloseClipboard()
 
-
+def set_clipboard_img(img):
+    """
+    设置剪切板的图片
+    """
+    clipboard.OpenClipboard()  #打开剪贴板
+    clipboard.EmptyClipboard()  #先清空剪贴板
+    clipboard.SetClipboardData(win32con.CF_DIB, img)  #将图片放入剪贴板
+    clipboard.CloseClipboard()
+    
+    
 try:
     # pip install Pillow
     from PIL import Image
@@ -146,8 +157,19 @@ def screen_to_pc(deviceslist, pwd):
                 if pil_status == "pil_true":
                     thumbnail(pc_path)
                 url_path = r"%s/%s/%s" % (django_upload_url, app_version, filename)
-                set_clipboard_text(url_path)
+                # 设置文本到剪切板
+                # set_clipboard_text(url_path)
                 print(url_path)
+                
+                # 设置图片到剪切板
+                image = Image.open(pc_path)
+                output = BytesIO()
+                image.convert("RGB").save(output, "BMP")
+                data = output.getvalue()[14:]
+                output.close()
+                set_clipboard_img(data)
+                
+                
                 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
                 desktop_file = os.path.join(desktop_path, "url_path.txt")
                 # with open(desktop_file,"a+") as f:
@@ -191,7 +213,7 @@ print('Author Email: zhuoqun527@qq.com\n')
 
 sdcard_path = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
 app_version = '1.9.80'  # 图片保存目录
-django_upload_url = "http://192.168.1.151/media/upload"
+django_upload_url = "http://192.168.1.99/media/upload"
 # pic_save_path = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
 pic_save_path = r'E:\yinzhuoqun\djangos\TestData\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
 
@@ -312,3 +334,4 @@ else:
             sys.stdout.write(u'错误：没发现设备，请连接你的设备。[%smin%ss]\r' % (a, b))
             sys.stdout.flush()
         times1 += 1
+
