@@ -117,9 +117,9 @@ if install_selenium != False:
         
         cuurent_date = time.localtime(time.time()) # 获取当前时间
         tm_mon = cuurent_date.tm_mon;logging.info('tm_mon:%s'%tm_mon)
-        tm_day = cuurent_date.tm_mday;logging.info('tm_day:%s'%tm_day)    
+        tm_day = cuurent_date.tm_mday;logging.info('tm_day:%s'%tm_day)
         tm_min = cuurent_date.tm_min;logging.info('tm_min:%s'%tm_min)
-        tm_sec = cuurent_date.tm_min;logging.info('tm_sec:%s'%tm_sec)         
+        tm_sec = cuurent_date.tm_min;logging.info('tm_sec:%s'%tm_sec)
                      
         random_min = random.randint(3,35);logging.info('random_min:%s'%random_min) # 随机选择签到分钟数
         # random_min = 10 # mock min

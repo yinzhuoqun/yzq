@@ -257,10 +257,10 @@ if sys.version_info.major >= 3:
             while apkCount == 0 or dumpContent == 0 or existSpaceAndChinese(apkPath) == True:
                 apkPath = input('\n请拖入apk文件并按下ENTER键：');  # print(len(apkPath))
 
-                if len(reApkPath) != 0 and len(apkPath) == 0:
-                    print('=.=你触发一个特技：即将安装上次的包=.=')
-                    apkPath = reApkPath
-                    print(apkPath)
+                # if len(reApkPath) != 0 and len(apkPath) == 0:
+                    # print('=.=你触发一个特技：即将安装上次的包=.=')
+                    # apkPath = reApkPath
+                    # print(apkPath)
 
                 apkPath = apkPath.strip();  # print(len(apkPath))	#去掉首尾空格
                 apkCount = len(re.findall('(.apk)', apkPath))
@@ -310,10 +310,11 @@ if sys.version_info.major >= 3:
 
                     number = input('请从设备序号表中选择需要安装的设备序号：')
 
-                    while isInt(number) == False:
+                    while number.isdigit() is False:
                         number = input('请从设备序号表中选择需要安装的设备序号：')
 
-                    if len(number) == 0 or int(number) > len(db_devices):
+                    # if len(number) == 0 or int(number) > len(db_devices):
+                    if int(number) > len(db_devices):
                         print('=.=你触发一个特技：即将安装到全部设备=.=')
 
                         # for device in devicesList:

@@ -102,5 +102,5 @@ if __name__ == "__main__":
     lasttime=datetime.datetime.now()
     taketime=(lasttime-starttime).seconds
     print('Take time',taketime,'s.')
-    print('Auto close the window after 30 seconds.')
+    print('The window will close after 30s.')
     time.sleep(30)
