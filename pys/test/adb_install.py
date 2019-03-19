@@ -341,8 +341,7 @@ if sys.version_info.major >= 3:
                             t.start()
                             # t.join()
 
-
-                    elif int(number) <= len(db_devices):
+                    elif 0 < int(number) <= len(db_devices):
                         device = db_devices[int(number)]
                         print(u'设备名称：%s' % device)
                         adbInstall(device, apkPath, packageName, startActivityName)
