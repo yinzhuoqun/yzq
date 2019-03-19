@@ -218,16 +218,20 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
         # print(sub_process.stderr.read().decode())
         # print(sub_process.stdout.read().decode())
         install_err = ""
+        install_out = ""
         while sub_process.poll() is None:
             err = sub_process.stderr.read().decode()
             install_err += err
             sys.stdout.write(err)
-            # out = sub_process.stdout.read().decode()
-            # sys.stdout.write(out)
+            sys.stdout.flush()
+            
+            out = sub_process.stdout.read().decode()
+            install_out += out
+            sys.stdout.write(out)
             sys.stdout.flush()
 
         print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-        if "Success" in install_err:
+        if "Success" in [install_err.strip(), install_out.strip()]:
             if packageName != "" and startActivityName != "":
                 startAPP(device, packageName, startActivityName)
             return True
