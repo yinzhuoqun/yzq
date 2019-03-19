@@ -35,13 +35,13 @@ def _format_addr(s):
     return formataddr((Header(name, 'utf-8').encode(), addr))
 
 #发送邮件
-def send_mail(message, msg_file_url):
+def send_mail(message, msg_file_url=None):
     # 输入邮件地址, 口令和POP3服务器地址:
     # email = input('Email: ')
-    from_addr = ''
+    from_addr = 'yzq@python3.cc'
     print('发件人：%s'%from_addr)
     # password = input('Password: ')
-    password = ''
+    password = 'wEmmn5aHHdJv3HkX'
 
     # 收件服务器
     # pop3_server = input('POP3 server: ')
@@ -50,7 +50,7 @@ def send_mail(message, msg_file_url):
     smtp_server = 'smtp.exmail.qq.com'
 
     # 收件人信息,必须传入list
-    to_addr = ['']
+    to_addr = ['zhouqun527@qq.com']
     for to_add in to_addr:
         print('收件人：%s'%to_add)
 
@@ -100,31 +100,38 @@ def send_mail(message, msg_file_url):
     ## 添加附件就是加上一个MIMEBase，从本地读取一个图片:
 
     # 取出路径的目录名和文件名
-    #import os
-    tuple_path_file = os.path.split(msg_file_url)
-    file = tuple_path_file[1]  # 目录名
-    # print(file)
-    with open(msg_file_url, 'rb') as f:
-        # 设置附件的MIME和文件名，这里是png类型:
-        mime = MIMEBase('image', 'txt', filename=file)
-        # 加上必要的头信息:
-        mime.add_header('Content-Disposition', 'attachment', filename=file)
-        mime.add_header('Content-ID', '<0>')
-        mime.add_header('X-Attachment-Id', '0')
-        # 把附件的内容读进来:
-        mime.set_payload(f.read())
-        # 用Base64编码:
-        encoders.encode_base64(mime)
-        # 添加到MIMEMultipart:
-        msg.attach(mime)
+    if msg_file_url != None:
+        tuple_path_file = os.path.split(msg_file_url)
+        file = tuple_path_file[1]  # 目录名
+        # print(file)
+
+        with open(msg_file_url, 'rb') as f:
+            # 设置附件的MIME和文件名，这里是png类型:
+            mime = MIMEBase('image', 'txt', filename=file)
+            # 加上必要的头信息:
+            mime.add_header('Content-Disposition', 'attachment', filename=file)
+            mime.add_header('Content-ID', '<0>')
+            mime.add_header('X-Attachment-Id', '0')
+            # 把附件的内容读进来:
+            mime.set_payload(f.read())
+            # 用Base64编码:
+            encoders.encode_base64(mime)
+            # 添加到MIMEMultipart:
+            msg.attach(mime)
 
     server = smtplib.SMTP(smtp_server, 25)  # 服务器
-    # server.set_debuglevel(1)#打印出和SMTP服务器交互的所有信息
+    server.set_debuglevel(1)#打印出和SMTP服务器交互的所有信息
     server.login(from_addr, password)  # 登陆发件人
     server.sendmail(from_addr, to_addr, msg.as_string())  # 发送try
     server.quit()
 
+    
+    
+send_mail("你好")
+print("###########")
+time.sleep(30)
 # 输出等于号函数
+
 def line(num):
     print('=' * num)
 
@@ -247,6 +254,8 @@ def englishname_to_chinesename(path, chinesename):
 
 # 定义monkey
 def monkeyt(device, packagename, evnet):
+    # https://blog.csdn.net/jlminghui/article/details/38238443
+    
     # t=time.strftime("%m%d%H%M%S")
     t = time.strftime("%Y-%m-%d_%H-%M-%S")
     filename = packagename + '_log' + t + '.txt'
@@ -257,7 +266,7 @@ def monkeyt(device, packagename, evnet):
 
     throttleTime = 50 # 事件间隔时间 毫秒（ms）
     seed = random.randint(100,500)#随进seed值
-    monkey = 'adb -s %s shell monkey -p %s -s %s --ignore-crashes --ignore-timeouts --monitor-native-crashes --throttle %s -v %s %s' % (
+    monkey = 'adb -s %s shell monkey -p %s -s %s --pct-syskeys 5 --ignore-crashes --ignore-timeouts --monitor-native-crashes --ignore-security-exceptions --throttle %s -v %s %s' % (
         device, packagename, seed, throttleTime, evnet, txt)
     # print(monkey)
 
@@ -276,7 +285,7 @@ def monkeyt(device, packagename, evnet):
     taketime = (lasttime - starttime).seconds
     print('用时:', taketime, 's')
 
-    print('日志:', filename, '\n位于:', pwd)
+    print('日志:', filename, '\n位于:', pwd + filename)
     crashPull(log_path, packagename)  # 导出crash
 
 
