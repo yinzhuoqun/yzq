@@ -26,7 +26,6 @@ if len(deviceslist) != 0:
                      "2": {"超级淘PRO": "com.chaojitao.star"},
                      "3": {"千米红包": "com.qmsh.hbq"},
                      "4": {"微信": "com.tencent.mm"},
-                     "5": {"闪电鸡":"com.sandianji.sdjandroid"},
                      }
     input_msg = "输入"
     for key, value in package_names.items():

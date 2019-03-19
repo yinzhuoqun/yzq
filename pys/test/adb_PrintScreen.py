@@ -155,7 +155,7 @@ def screen_to_pc(deviceslist, pwd):
             if os.path.exists(pc_path) == True:
                 print(pc_path)
                 if pil_status == "pil_true":
-                    thumbnail(pc_path)  # 设置缩略图
+                    thumbnail(pc_path)
                 url_path = r"%s/%s/%s" % (django_upload_url, app_version, filename)
                 # 设置文本到剪切板
                 # set_clipboard_text(url_path)

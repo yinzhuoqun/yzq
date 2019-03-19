@@ -217,21 +217,17 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
         # print(dir(sub_process))
         # print(sub_process.stderr.read().decode())
         # print(sub_process.stdout.read().decode())
-        install_out = ""
         install_err = ""
         while sub_process.poll() is None:
-            read_err = sub_process.stderr.read().decode()
-            install_err += read_err
-            sys.stdout.write(read_err)
-            
-            read_out = sub_process.stdout.read().decode()
-            install_out += read_out
-            sys.stdout.write(read_out)
-            
+            err = sub_process.stderr.read().decode()
+            install_err += err
+            sys.stdout.write(err)
+            # out = sub_process.stdout.read().decode()
+            # sys.stdout.write(out)
             sys.stdout.flush()
 
         print(time.strftime("%Y-%m-%d %H:%M:%S"))  # 当前时间
-        if "Success" in [install_out.strip(), install_err.strip()]:
+        if "Success" in install_err:
             if packageName != "" and startActivityName != "":
                 startAPP(device, packageName, startActivityName)
             return True
@@ -259,7 +255,7 @@ if sys.version_info.major >= 3:
             apkCount = 1
 
             while apkCount == 0 or dumpContent == 0 or existSpaceAndChinese(apkPath) == True:
-                apkPath = input('\n请拖入APK文件并按下ENTER键：');  # print(len(apkPath))
+                apkPath = input('\n请拖入apk文件并按下ENTER键：');  # print(len(apkPath))
 
                 # if len(reApkPath) != 0 and len(apkPath) == 0:
                     # print('=.=你触发一个特技：即将安装上次的包=.=')
@@ -318,7 +314,7 @@ if sys.version_info.major >= 3:
                         number = input('请从设备序号表中选择需要安装的设备序号：')
 
                     # if len(number) == 0 or int(number) > len(db_devices):
-                    if int(number) > len(db_devices) or int(number) == 0:
+                    if int(number) > len(db_devices):
                         print('=.=你触发一个特技：即将安装到全部设备=.=')
 
                         # for device in devicesList:
