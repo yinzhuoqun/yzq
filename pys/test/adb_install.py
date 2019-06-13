@@ -242,17 +242,12 @@ def adbInstall(device, apkPath, packageName="", startActivityName=""):
 # version = versionStatus()
 
 if sys.version_info.major >= 3:
-
     # print('author:yinzhuoqun')
     print('《adb install》\n Author Email : zhuoqun527@qq.com')
     reApkPath = ''
     disconnectTime = 1
     while 1:
-
         if len(deivicesFunc()) != 0:
-            if os.name == 'nt':
-                os.system('color 02')
-
             disconnectTime = 1
             apkPath = ''
             dumpContent = 0
@@ -354,10 +349,6 @@ if sys.version_info.major >= 3:
                     englishNameToChinesename(apkPath, oldName)
 
         else:
-            if os.name == 'nt':
-                os.system('color 0C')
-            import sys
-
             for i in range(3):
                 time.sleep(1)
                 if disconnectTime <= 60:
@@ -368,7 +359,6 @@ if sys.version_info.major >= 3:
                     b = disconnectTime % 60;  # print('b',b)
                     sys.stdout.write(u'错误：没发现设备，请连接你的设备。[%smin%ss]\r' % (a, b))
                     sys.stdout.flush()
-
                 disconnectTime += 1
 else:
     print("Python 版本不对应")

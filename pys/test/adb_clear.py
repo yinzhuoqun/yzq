@@ -22,8 +22,8 @@ if len(deviceslist)!=0:
 
     #packagename=input('please input packagename and press ENTER:\n');packagename=packagename.strip()
     # packagename='com.lexiangquan.supertao'	#set packagename设置包名后可一键卸载
-    packagename='com.qmsh.hbq'	#set packagename设置包名后可一键卸载
-    #packagename='com.l99.lotto'	#set packagename设置包名后可一键卸载
+    # packagename='com.qmsh.hbq'	#set packagename设置包名后可一键卸载
+    packagename='com.sandianji.sdjandroid'	#set packagename设置包名后可一键卸载
 
     print('you have devices:%s'%len(deviceslist))
     print('clearing packagename: %s'%packagename)

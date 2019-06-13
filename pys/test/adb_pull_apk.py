@@ -92,7 +92,8 @@ if run == 1:
     # packageNameTemp='com.chaojitao.star' #设置一个默认的包名
     # packageNameTemp='com.tencent.mm' #设置一个默认的包名
     # packageNameTemp='com.yzq.meid' #设置一个默认的包名
-    packageNameTemp='com.qmsh.hbq' #设置一个默认的包名
+    # packageNameTemp='com.qmsh.hbq' #设置一个默认的包名
+    packageNameTemp='com.sandianji.sdjandroid' #设置一个默认的包名
 
     deviceslist = dlist()
 
