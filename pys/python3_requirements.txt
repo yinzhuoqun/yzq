@@ -62,7 +62,7 @@ tqdm==4.8.4
 tzlocal==1.4
 virtualenv==15.0.3
 webencodings==0.5
-Werkzeug==0.12.1
+Werkzeug==0.15.3
 wxPython-Phoenix==3.0.3.dev2553+47f1fd2
 xlrd==1.0.0
 xlwt==1.1.2
