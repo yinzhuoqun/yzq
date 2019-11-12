@@ -155,7 +155,8 @@ def screen_to_pc(deviceslist, pwd):
             if os.path.exists(pc_path) == True:
                 print(pc_path)
                 if pil_status == "pil_true":
-                    thumbnail(pc_path)  # 设置缩略图
+                    pass
+                    # thumbnail(pc_path)  # 设置缩略图
                 url_path = r"%s/%s/%s" % (django_upload_url, app_version, filename)
                 # 设置文本到剪切板
                 # set_clipboard_text(url_path)
@@ -169,14 +170,13 @@ def screen_to_pc(deviceslist, pwd):
                 output.close()
                 set_clipboard_img(data)
                 
-                
-                desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 图片保存至电脑桌面
-                desktop_file = os.path.join(desktop_path, "url_path.txt")
-                # with open(desktop_file,"a+") as f:
-                with open(desktop_file, "w") as f:
-                    f.seek(0, 0)
-                    s_time = time.strftime("%Y-%m-%d %H:%M:%S")
-                    f.write(url_path)
+                # 图片路径保存到文件
+                # desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")  # 电脑桌面路径
+                # desktop_file = os.path.join(desktop_path, "url_path.txt")
+                # with open(desktop_file, "w") as f:
+                    # f.seek(0, 0)
+                    # s_time = time.strftime("%Y-%m-%d %H:%M:%S")
+                    # f.write(url_path)
                 return pc_path
             picTimes += 1  # 叠加图片序号防止重名
             
@@ -211,9 +211,9 @@ if os.name == 'nt':
     os.system('color 02')
 print('Author Email: zhuoqun527@qq.com\n')
 
-sdcard_path = r'/sdcard/screenshot.png'  # 设置图片在手机中保存的位置
-app_version = '1.9.80'  # 图片保存目录
-django_upload_url = "http://192.168.1.99/media/upload"
+sdcard_path = r'/sdcard/screenshot_%s.png' % int(time.time())   # 设置图片在手机中保存的位置
+app_version = '3.3.0'  # 图片保存目录
+django_upload_url = "http://192.168.3.17/media/upload"
 # pic_save_path = r'I:\91UserData\ScreenCapture'  # 设置图片在电脑中的文件夹
 pic_save_path = r'E:\yinzhuoqun\djangos\TestData\media\upload\%s' % app_version  # 设置图片在电脑中的文件夹
 
