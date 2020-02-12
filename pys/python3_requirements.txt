@@ -13,7 +13,7 @@ configparser==3.5.0
 cryptography==1.7.1
 cx-Freeze==4.3.4
 cycler==0.10.0
-Django==1.8.18
+Django==1.11.28
 django-ipware==1.1.6
 enum34==1.0.4
 et-xmlfile==1.0.1
