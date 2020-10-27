@@ -10,7 +10,7 @@ ChinaWeather==0.1.0
 click==6.7
 colorama==0.3.3
 configparser==3.5.0
-cryptography==1.7.1
+cryptography==3.2
 cx-Freeze==4.3.4
 cycler==0.10.0
 Django==1.8.18
