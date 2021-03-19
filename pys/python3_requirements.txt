@@ -24,7 +24,7 @@ html5lib==0.999999999
 idna==2.2
 itsdangerous==0.24
 jdcal==1.2
-Jinja2==2.9.6
+Jinja2==2.11.3
 lxml==3.6.4
 MarkupSafe==1.0
 matplotlib==1.5.3
