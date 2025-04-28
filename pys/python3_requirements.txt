@@ -3,7 +3,7 @@ appium-python-client==0.17
 APScheduler==3.3.1
 beautifulsoup4==4.5.1
 bs4==0.0.1
-certifi==2017.4.17
+certifi==2022.12.7
 cffi==1.9.1
 chardet==2.3.0
 ChinaWeather==0.1.0
